@@ -1,0 +1,87 @@
+.slide {
+    height: 89vh;
+    background-color: var(--light-pink);
+    color: var(--text-blue);
+    .slide-right {
+        border-radius: 50%;
+        img {
+            border-radius: 50%;
+        }
+    }
+    .slide-left {
+        h1 {
+            font-weight: 900;
+            font-size: 4.5rem;
+        }
+        h5 {
+            font-weight: 400;
+            font-size: 1.5rem;
+        }
+        .btn {
+            background: #3A54B4;
+            color: white;
+            border: 0;
+            line-height: 0;
+            letter-spacing: 1px;
+            font-weight: 500;
+            border-radius: 30px;
+            padding: 27px 44px;
+            transition: color 0.4s linear;
+            &:hover {
+                background: #213fad;
+                color: white;
+            }
+        }
+    }
+}
+
+.pets {
+    background-color: var(--light);
+    .card {
+        border: 0;
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
+        .card-img {
+            overflow: hidden;
+            img {
+                transition: all ease 0.3s;
+                cursor: pointer;
+                &:hover {
+                    transform: scale(1.25);
+                }
+            }
+        }
+        .card-body {
+            h5 {
+                font-weight: 700;
+            }
+            .card-text {
+                i {
+                    margin-right: 0.5rem;
+                }
+                .card-button {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin-top: 4rem;
+                    a {
+                        background: transparent;
+                        color: var(--bg-blue);
+                        border: 1px solid var(--bg-blue);
+                        line-height: 0;
+                        letter-spacing: 1px;
+                        font-weight: 500;
+                        border-radius: 30px;
+                        padding: 1rem 1rem;
+                        position: absolute;
+                        bottom: 0;
+                        margin-bottom: 1rem;
+                        transition: color 0.4s linear;
+                        &:hover {
+                            background: var(--bg-blue);
+                            color: white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Encuéntrame</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/222a3ac483.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/registerPet.css">
+    <link rel="icon" type="image/png" href="assets/img/logo.png" />
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/img/logo.png" alt="logo" width="40" height="34" class="d-inline-block align-top">Encuéntrame
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mascotas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item">Perros</a></li>
+                                <li><a class="dropdown-item">Gatos</a></li>
+                                <li><a class="dropdown-item">Conejos</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href=""><i class="fas fa-user"></i>Iniciar sesión</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="registration">
+            <div class="container pt-5 pb-5">
+                <div class="row text-white">
+                    <div class="col col-6 img-side">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <img src="assets/img/siames.jpg" class="card-img-top" alt="...">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title" id="nameOutput"><span class="text-secondary">nombre</span></h5>
+                                        <div class="card-text">
+                                            <div>
+                                                <i class="fas fa-clinic-medical"></i>
+                                                <p id="breedOutput"><span class="text-secondary">raza</span></p>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col col-6">
+                                                    <i class="far fa-calendar mr"></i>
+                                                    <p id="ageOutput"><span class="text-secondary">edad</span></p>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <i class="fas fa-paw"></i>
+                                                    <p id="genderOutput"><span class="text-secondary">sexo</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col col-6">
+                                                    <i class="fas fa-tint"></i>
+                                                    <p id="colourOutput"><span class="text-secondary">color</span></p>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <i class="fas fa-window-minimize"></i>
+                                                    <p id="typeOutput"><span class="text-secondary">tipo</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <i class="fas fa-plus-circle mr"></i>
+                                                    <p id="featuresOutput"><span class="text-secondary">rasgos</span></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row pt-4">
+                                                <div class="col">
+                                                    <i class="fas fa-map-marker-alt"></i>
+                                                    <p id="placeOutput"><span class="text-secondary">lugar</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col col-6">
+                                                    <i class="far fa-clock"></i>
+                                                    <p id="hourOutput"><span class="text-secondary">horario</span></p>
+                                                </div>
+                                                <div class="col col-6">
+                                                    <i class="far fa-calendar"></i>
+                                                    <p id="dateOutput"><span class="text-secondary">fecha</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-6 form-side">
+                        <h1>Comparte la mascota perdida</h1>
+                        <p>Se hará un post de la mascota para que otros puedan conocerla</p>
+
+                        <div class="registration-form">
+                            <form id="submitFormNewPet">
+                                <div>
+                                    <div class="step-one row g-3 mt-4" id="stepOneContainer">
+                                        <div class="col-md-6">
+                                            <label for="name" class="form-label">Nombre</label>
+                                            <input type="text" class="form-control" id="nameInput" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="breed" class="form-label">Raza</label>
+                                            <input type="text" class="form-control" id="breedInput" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="age" class="form-label">Edad</label>
+                                            <input type="number" class="form-control" id="ageInput" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="gender" class="form-label">Sexo</label>
+                                            <select class="form-select" id="genderInput" required="">
+                                    <option value="" selected>Seleccionar sexo</option>
+                                    <option value="macho">Macho</option>
+                                    <option value="hembra">Hembra</option>
+                                  </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="gender" class="form-label">Tipo</label>
+                                            <select class="form-select" id="typeInput" required="">
+                                    <option value="" selected>Seleccionar tipo</option>
+                                    <option value="perro">Perro</option>
+                                    <option value="gato">Gato</option>
+                                    <option value="conejo">Conejo</option>
+                                  </select>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="gender" class="form-label">Imagen</label>
+                                            <form action="assets/php/upload.php" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="file">
+                                                <input type="submit" name="submit" value="Upload">
+                                            </form>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="features" class="form-label">Descripción</label>
+                                            <textarea class="form-control" id="featuresInput" rows="3" maxlength="140" placeholder="Aquí podras escribir datos extra sobre tu mascota" required=""></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="colour" class="form-label">Color</label>
+
+                                            <div class="colour-container">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="negro" id="blackColour">
+                                                    <label class="form-check-label" for="blackColour">
+                                      Negro
+                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="blanco" id="whiteColour">
+                                                    <label class="form-check-label" for="whiteColour">
+                                      Blanco
+                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="marron" id="brownColour">
+                                                    <label class="form-check-label" for="brownColour">
+                                      Marrón
+                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="gris" id="greyColour">
+                                                    <label class="form-check-label" for="greyColour">
+                                      Gris
+                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="crema" id="creamColour">
+                                                    <label class="form-check-label" for="creamColour">
+                                      Crema
+                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- to check -->
+                                        <div class="col-12">
+                                            <p id="textWarning"></p>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button class="btn" id="btnNext">
+                                                Siguiente
+                                                <i class="fas fa-chevron-right ml-1"></i>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <div class="step-two row g-3 mt-4 hide" id="stepTwoContainer">
+                                        <div class="col-12">
+                                            <label for="place" class="form-label">Lugar</label>
+                                            <input type="text" class="form-control" id="placeInput" placeholder="Zona en la que se perdió" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="hour" class="form-label">Hora</label>
+                                            <input type="time" class="form-control" id="hourInput" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="date" class="form-label">Fecha</label>
+                                            <input type="date" class="form-control" id="dateInput" required="">
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-start">
+                                            <button class="btn" id="btnPrevious">
+                                                <i class="fas fa-chevron-left mr-1"></i>
+                                                Anterior
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 register-btn-container d-flex justify-content-end">
+                                        <button type="submit" class="btn mt-5 hide" id="btnSubmit">Publicar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+
+    <script src="assets/js/registerPet.js" type="module"></script>
+    <script src="assets/js/uploadFile.js"></script>
+
+</body>
+
+</html>

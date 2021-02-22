@@ -1,0 +1,164 @@
+:root {
+  --pink: #ff8b7b;
+  --pink-hover: #ff7967;
+  --light-pink: #fef7ed;
+  --bg-blue: #213fad;
+  --text-blue: #3a54b4;
+  --light: #f8f9fd;
+}
+
+body {
+  background-color: var(--bg-blue);
+}
+
+.registration .img-side .row {
+  padding-right: 6rem;
+  padding-left: 6rem;
+}
+.registration .img-side .row .card {
+  border: 0;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+.registration .img-side .row .card .card-img {
+  overflow: hidden;
+  max-height: 20rem;
+}
+.registration .img-side .row .card .card-img img {
+  transition: all ease 0.3s;
+  cursor: pointer;
+  max-height: 20rem;
+  object-fit: cover;
+  object-position: center center;
+}
+.registration .img-side .row .card .card-img img:hover {
+  transform: scale(1.25);
+}
+.registration .img-side .row .card .card-body {
+  color: black;
+}
+.registration .img-side .row .card .card-body h5 {
+  font-weight: 700;
+}
+.registration .img-side .row .card .card-body .card-text div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.registration .img-side .row .card .card-body .card-text div.row {
+  padding: 0;
+  margin-bottom: 0;
+}
+.registration .img-side .row .card .card-body .card-text div i {
+  margin-right: 0.5rem;
+}
+.registration .img-side .row .card .card-body .card-text div p {
+  margin-bottom: 0;
+}
+
+.form-side .registration-form .colour-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.form-side .registration-form .colour-container .form-check {
+  margin-right: 2rem;
+}
+.form-side .registration-form .btn {
+  background: var(--pink);
+  color: white;
+  border: 0;
+  line-height: 0;
+  letter-spacing: 1px;
+  font-weight: 500;
+  border-radius: 30px;
+  padding: 14px 24px;
+  transition: color 0.4s linear;
+}
+.form-side .registration-form .btn#btnSubmit {
+  padding: 27px 44px;
+}
+.form-side .registration-form .btn:hover {
+  background: var(--pink-hover);
+  color: white;
+}
+
+/* 
+.img-loader-preview {
+    width: 100%;
+}
+#containerInput {
+    width: 640px;
+    margin: 0 auto;
+    border: solid 1px #CCC;
+    position: relative;
+    overflow: hidden;
+    .file-container {
+        .content-icon-camera {
+            width: 5rem;
+            overflow: hidden;
+            &:hover {
+                background-color: #e6e6e6;
+            }
+            #file {
+                padding: 15px;
+                opacity: 0;
+                position: relative;
+                cursor: pointer;
+                left: -120px;
+                z-index: 1;
+            }
+            .icon-camera {
+                width: 36px;
+                height: 36px;
+                background: url('../img/camera.png') no-repeat;
+                cursor: pointer;
+                position: absolute;
+                top: 8px;
+                left: 8px;
+            }
+        }
+        #previewImages .thumbnail {
+            width: 120px;
+            height: 120px;
+            display: inline-block;
+            vertical-align: middle;
+            border: solid 2px #CCC;
+            background-size: cover;
+            position: relative;
+            &.thumbnail:not(:last-child) {
+                margin-right: 5px;
+            }
+            .close-button {
+                width: 20px;
+                height: 20px;
+                background-color: black;
+                color: white;
+                text-align: center;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                border-radius: 100px;
+                cursor: pointer;
+            }
+        }
+    }
+    #publish {
+        padding: 15px 35px;
+        font-size: 1.1em;
+        float: right;
+        border: none;
+        cursor: pointer;
+        background-color: #8ECA67;
+        color: #FFF;
+        &:hover {
+            background-color: #6EAD45;
+        }
+    }
+}
+.preload {
+    padding-top: 20px;
+    text-align: center;
+    display: none;
+}
+.activate-preload {
+    display: block;
+} */

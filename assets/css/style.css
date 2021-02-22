@@ -1,0 +1,96 @@
+.slide {
+    height: 89vh;
+    background-color: var(--light-pink);
+    color: var(--text-blue);
+}
+
+.slide .slide-right {
+    border-radius: 50%;
+}
+
+.slide .slide-right img {
+    border-radius: 50%;
+}
+
+.slide .slide-left h1 {
+    font-weight: 900;
+    font-size: 4.5rem;
+}
+
+.slide .slide-left h5 {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.slide .slide-left .btn {
+    background: #3A54B4;
+    color: white;
+    border: 0;
+    line-height: 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 27px 44px;
+    transition: color 0.4s linear;
+}
+
+.slide .slide-left .btn:hover {
+    background: #213fad;
+    color: white;
+}
+
+.pets {
+    background-color: var(--light);
+}
+
+.pets .card {
+    border: 0;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+}
+
+.pets .card .card-img {
+    overflow: hidden;
+}
+
+.pets .card .card-img img {
+    transition: all ease 0.3s;
+    cursor: pointer;
+}
+
+.pets .card .card-img img:hover {
+    transform: scale(1.25);
+}
+
+.pets .card .card-body h5 {
+    font-weight: 700;
+}
+
+.pets .card .card-body .card-text i {
+    margin-right: 0.5rem;
+}
+
+.pets .card .card-body .card-text .card-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4rem;
+}
+
+.pets .card .card-body .card-text .card-button a {
+    background: transparent;
+    color: var(--bg-blue);
+    border: 1px solid var(--bg-blue);
+    line-height: 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 1rem 1rem;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 1rem;
+    transition: color 0.4s linear;
+}
+
+.pets .card .card-body .card-text .card-button a:hover {
+    background: var(--bg-blue);
+    color: white;
+}
