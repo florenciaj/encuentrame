@@ -35,6 +35,23 @@
     }
 }
 
+.register-pet {
+    .container {
+        .row {
+            .img-container {
+                img {
+                    width: 90%;
+                }
+            }
+            .register-pet-info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+}
+
 .pets {
     background-color: var(--light);
     .card {
