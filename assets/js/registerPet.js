@@ -51,14 +51,22 @@ window.addEventListener('load', function() {
                 })
 
                 /* saves new Loss into missed pet*/
-            }).then(result => {
-                ui.showSuccessToastMessage('Ya se ha creado el post')
+            }).then(() => {
+                showSuccessMessage('Ya se ha creado el post');
             }).catch(error => {
-                console.log('segundo llamado error')
                 console.log(error)
 
             })
         })
+
+        function showSuccessMessage(message) {
+            ui.showSuccessToastMessage(message);
+            let toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            let toastList = toastElList.map(function(toastEl) {
+                return new bootstrap.Toast(toastEl);
+            });
+            toastList.forEach(toast => toast.show());
+        }
     }
 
     function saveNewPet() {
