@@ -1,6 +1,7 @@
 import { PetFinder } from './PetFinder.js';
 import { Pet } from './Pet.js';
 import { Loss } from './Loss.js';
+import { UI } from './UI.js';
 
 const btnNext = document.getElementById('btnNext')
 const btnPrevious = document.getElementById('btnPrevious')
@@ -23,24 +24,41 @@ btnPrevious.addEventListener('click', function() {
 
 
 let petFinder = new PetFinder()
+let ui = new UI()
 
 window.addEventListener('load', function() {
+
     function addNewMissedPet() {
-        if (document.getElementById('submitFormNewPet')) {
-            document.getElementById('submitFormNewPet').addEventListener('submit', function(e) {
-                e.preventDefault()
+        document.getElementById('submitFormNewPet').addEventListener('submit', function(e) {
+            e.preventDefault()
 
-                let savedPet = saveNewPet()
-
-                setTimeout(function() {
-                    saveLossInfo(savedPet)
-                    showModalWithMessage('Se ha creado todo correctamente')
-                    localStorage.setItem('petsLocalStorage', JSON.stringify(petFinder.pets))
-                }, 1000)
+            let savedPet
+            const CreatePostPromise = new Promise((resolve, reject) => {
+                savedPet = saveNewPet()
+                if (savedPet)
+                    resolve('Se ha creado el post con la mascota')
+                else
+                    reject('No se ha podido crear un post con la mascota')
             })
-        }
 
+            /* saves new Loss */
+            CreatePostPromise.then(result => {
+                return new Promise((resolve, reject) => {
+                    if (saveLossInfo(savedPet)) {
+                        resolve('No se creó un extravío')
+                    } else
+                        reject('No se guardaron los datos sobre el extravío, inténtelo nuevamente')
+                })
 
+                /* saves new Loss into missed pet*/
+            }).then(result => {
+                ui.showSuccessToastMessage('Ya se ha creado el post')
+            }).catch(error => {
+                console.log('segundo llamado error')
+                console.log(error)
+
+            })
+        })
     }
 
     function saveNewPet() {
@@ -52,50 +70,63 @@ window.addEventListener('load', function() {
         let colour = []
         colour = getPetColour(colour);
         let features = document.getElementById('featuresInput').value
-
+        let photo
+        console.log(features)
         let petValues = [name, breed, age, gender, type, colour, features]
         if (checkIfPetHasAllValues(petValues)) {
-            const photo = null;
-            const state = "Perdido";
-            const Loss = null;
-            return saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, Loss, features);
+            photo = setPetPhoto(type)
+            const state = "Perdido"
+            return saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, features)
         }
         return false;
+
+        function setPetPhoto() {
+            if (type == 'gato')
+                photo = 'defaultImageCat.png'
+
+            else if (type == 'perro')
+                photo = 'defaultImageDog.png'
+
+            else
+                photo = 'defaultImageRabbit.png'
+
+            return photo;
+        }
     }
 
     function checkIfPetHasAllValues(petValues) {
         let allDataIsComplete = true
 
         for (let i = 0; i < petValues.length; i++) {
+            console.log(petValues[i])
+
             if (petValues[i] == null || petValues[i] == "")
                 allDataIsComplete = false
         }
         return allDataIsComplete
     }
 
-    function saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, Loss, features) {
-        let newPet = new Pet(petFinder.generateNewPetId(), name, type, breed, age, colour, gender, photo, state, Loss, features);
-        petFinder.pets.push(newPet);
-        console.log(petFinder.pets);
+    function saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, features) {
+        console.log('features en save and add new pet' + features)
+        let newPet = new Pet(petFinder.generateNewPetId(), name, type, breed, age, colour, gender, photo, state, features)
+        petFinder.saveNewPetInLocalStorage(newPet)
         return newPet
     }
 
     function getPetColour(colour) {
-        let blackColour = document.getElementById("blackColour");
-        let whiteColour = document.getElementById("whiteColour");
-        let brownColour = document.getElementById("brownColour");
-        let greyColour = document.getElementById("greyColour");
-        let creamColour = document.getElementById("creamColour");
+        let blackColour = document.getElementById('blackColour')
+        let whiteColour = document.getElementById('whiteColour')
+        let brownColour = document.getElementById('brownColour')
+        let greyColour = document.getElementById('greyColour')
+        let creamColour = document.getElementById('creamColour')
 
-        let petColours = [blackColour, whiteColour, brownColour, greyColour, creamColour];
+        let petColours = [blackColour, whiteColour, brownColour, greyColour, creamColour]
         for (let i = 0; i < petColours.length; i++) {
             if (petColours[i].checked)
-                colour.push(petColours[i].value);
+                colour.push(petColours[i].value)
         }
-        console.log("color:")
-        console.log(colour)
         if (colour.length === 0)
-            return colour = "No se reconoce el color"
+            return colour = 'No se reconoce el color'
 
         else
             return colour
@@ -144,14 +175,14 @@ window.addEventListener('load', function() {
                 }
             }
 
-            function validateAndShowColours(nameOutput) {
-                let colour = []
-                let petColours = getPetColour(colour)
-                for (let i = 0; i < petColours.length; i++) {
-                    const element = petColours[i];
-                    nameOutput.innerHTML = "petColours";
-                }
-            }
+            /*             function validateAndShowColours(nameOutput) {
+                            let colour = []
+                            let petColours = getPetColour(colour)
+                            for (let i = 0; i < petColours.length; i++) {
+                                const element = petColours[i];
+                                nameOutput.innerHTML = "petColours";
+                            }
+                        } */
         };
     }
 
@@ -187,12 +218,12 @@ window.addEventListener('load', function() {
         let hour = document.getElementById('hourInput').value
         let data = document.getElementById('dateInput').value
 
-        return new Loss(place, hour, data, savedPet)
+        let newLoss = new Loss(petFinder.generateNewLossId(), place, hour, data, savedPet)
+        petFinder.saveNewLossInLocalStorage(newLoss)
+
+        return newLoss
     }
 
-    function showModalWithMessage(message) {
-        alert(message)
-    }
 
     addNewMissedPet()
     iteratePetValuesToWrite()

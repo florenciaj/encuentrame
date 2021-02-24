@@ -1,5 +1,6 @@
 import { Pet } from './Pet.js';
 import { User } from './User.js';
+import { Loss } from './Loss.js';
 
 export class PetFinder {
     constructor() {
@@ -12,11 +13,19 @@ export class PetFinder {
         ]
 
         this.pets = [
-            new Pet(1, 'Toby', 'Perro', 'Rottweiler', 1, 'Negro y marrón', 'M', 'rottweiler.jpg', 'Perdido', null, 'Tiene un collar rojo'),
-            new Pet(2, 'Blanca', 'Gato', 'No aplica', 2, 'Blanco', 'H', 'gato_blanco.jpg', 'Perdido', null, 'Un ojo es verde y otro azul'),
-            new Pet(3, 'Coco', 'Gato', 'Siamés', 4, 'Gris y negro', 'M', 'siames.jpg', 'Perdido', null, 'Tiene una mancha blanca en la oreja izquierda'),
-            new Pet(4, 'Oreo', 'Conejo', 'Holandés', 0.5, 'Negro y blanco', 'H', 'conejo_holandes.jpg', 'Perdido', null, 'Sus orejas son caidas'),
-            new Pet(5, 'Milo', 'Perro', 'Caniche', 8, 'Marrón', 'M', 'caniche.jpg', 'Perdido', null, 'Tiene un tapado verde')
+            new Pet(1, 'Toby', 'Perro', 'Rottweiler', 1, 'Negro y marrón', 'M', 'rottweiler.jpg', 'Perdido', 'Tiene un collar rojo'),
+            new Pet(2, 'Blanca', 'Gato', 'No aplica', 2, 'Blanco', 'H', 'gato_blanco.jpg', 'Perdido', 'Un ojo es verde y otro azul'),
+            new Pet(3, 'Coco', 'Gato', 'Siamés', 4, 'Gris y negro', 'M', 'siames.jpg', 'Perdido', 'Tiene una mancha blanca en la oreja izquierda'),
+            new Pet(4, 'Oreo', 'Conejo', 'Holandés', 0.5, 'Negro y blanco', 'H', 'conejo_holandes.jpg', 'Perdido', 'Sus orejas son caidas'),
+            new Pet(5, 'Milo', 'Perro', 'Caniche', 8, 'Marrón', 'M', 'caniche.jpg', 'Perdido', 'Tiene un tapado verde')
+        ]
+
+        this.losses = [
+            new Loss(1, 'San Justo', '11:30', '22/02/2021', 1),
+            new Loss(2, 'CABA', '21:50', '06/02/2021', 2),
+            new Loss(3, 'Ramos Mejía', '01:15', '08/01/2021', 3),
+            new Loss(4, 'Haedo', '18:20', '29/01/2021', 4),
+            new Loss(5, 'San Justo', '15:10', '26/01/2021', 5)
         ]
     }
 
@@ -70,15 +79,43 @@ export class PetFinder {
         xhttp.send()
     }
 
+
     /* pet methods */
     generateNewPetId() {
-        return this.pets.length + 1;
+        return this.getLosses().length + 1;
     }
 
-    getAllPets() {
-        if (JSON.parse(localStorage.getItem('petsLocalStorage') === null))
-            return this.pets
+    getPets() {
+        if (localStorage.getItem('petsLocalStorage') !== '')
+            return JSON.parse(localStorage.getItem('petsLocalStorage'))
 
-        return JSON.parse(localStorage.getItem('petsLocalStorage'))
+        localStorage.setItem('petsLocalStorage', JSON.stringify(this.pets))
+        return this.pets
     }
+
+    saveNewPetInLocalStorage(newPet) {
+        let storageOPets = this.getPets()
+        storageOPets.push(newPet)
+        localStorage.setItem('petsLocalStorage', JSON.stringify(storageOPets))
+    }
+
+    /* loss methods */
+    generateNewLossId() {
+        return this.getLosses().length + 1;
+    }
+
+    getLosses() {
+        if (localStorage.getItem('lossesLocalStorage') !== '')
+            return JSON.parse(localStorage.getItem('lossesLocalStorage'))
+
+        localStorage.setItem('lossesLocalStorage', JSON.stringify(this.losses))
+        return this.losses
+    }
+
+    saveNewLossInLocalStorage(newLoss) {
+        let storageLosses = this.getLosses()
+        storageLosses.push(newLoss)
+        localStorage.setItem('lossesLocalStorage', JSON.stringify(storageLosses))
+    }
+
 }

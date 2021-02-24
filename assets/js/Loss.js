@@ -1,8 +1,9 @@
 export class Loss {
-    constructor(place, hour, date, Pet) {
+    constructor(id, place, hour, date, idPet) {
+        this.id = id;
         this.place = place;
         this.hour = hour;
         this.date = date;
-        this.Pet = Pet;
+        this.idPet = idPet;
     }
 }

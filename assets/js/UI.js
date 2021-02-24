@@ -66,6 +66,25 @@ export class UI {
         `
     }
 
+    showSuccessToastMessage(message) {
+        const toastContainer = document.getElementById('toastContainer')
+
+        toastContainer.innerHTML = `
+        <div class="position-fixed bottom-0 end-0 p-3 toast-wrapper">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <img src="assets/img/logo.png" alt="Encuéntrame logo">
+                    <strong class="me-auto">Encuéntrame</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    <b>${message}
+                </div>
+            </div>
+        </div>
+        `
+    }
+
     showToastErrorMessage() {
         const toastContainer = document.getElementById('toastContainer')
 
