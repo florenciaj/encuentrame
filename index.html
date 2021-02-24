@@ -74,6 +74,70 @@
         </div>
     </section>
 
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#petInfoModal">
+    Launch demo modal
+  </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="petInfoModal" tabindex="-1" aria-labelledby="petInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="petInfoModalLabel">¿Lo viste?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col col-6">
+                            <img src="assets/img/conejo_holandes.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="col col-6">
+                            <div class="row main">
+                                <h5 id="nameModal"></h5>
+                                <p id="genderModal"></p>
+                            </div>
+                            <div class="second text-secondary">
+                                <p id="breedModal"></p>
+                                <p id="ageModal"></p>
+                            </div>
+                            <div class="col info">
+                                <p><b>Color:</b></p>
+                                <p id="colourModal"></p>
+                            </div>
+                            <div class="col">
+                                <p><b>Características:</b></p>
+                                <p id="featuresModal"></p>
+                            </div>
+                        </div>
+                        <div class="col mt-5">
+                            <h4>Datos sobre la pérdida</h4>
+                            <div>
+                                <p>Se perdió en:</p>
+                                <p id="placeModal"></p>
+                            </div>
+                            <div>
+                                <p>Fecha: </p>
+                                <p id="dateModal"></p>
+                            </div>
+                            <div>
+                                <p>Horario: </p>
+                                <p id="hourModal"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="register-pet" id="registerPet">
         <div class="container pt-5 pb-5">
             <div class="row">
@@ -105,7 +169,7 @@
 
 
     <!-- form modal-->
-    <div class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="petInfoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -221,6 +285,8 @@
     </script>
 
     <script src="assets/js/index.js" type="module"></script>
+    <script src="assets/js/PetFinder.js" type="module"></script>
+
     <script src="assets/js/login.js" type="module"></script>
 
 </body>

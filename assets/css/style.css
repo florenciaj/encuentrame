@@ -88,3 +88,50 @@
   background: var(--bg-blue);
   color: white;
 }
+
+#petInfoModal .modal-dialog .modal-content .modal-body {
+  padding-top: 2rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body img {
+  border-radius: 2rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .main,
+#petInfoModal .modal-dialog .modal-content .modal-body .second,
+#petInfoModal .modal-dialog .modal-content .modal-body .info {
+  display: flex;
+  flex-wrap: nowrap;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .main #nameModal,
+#petInfoModal .modal-dialog .modal-content .modal-body .second #nameModal,
+#petInfoModal .modal-dialog .modal-content .modal-body .info #nameModal {
+  color: var(--text-blue);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-right: 0;
+  padding-right: 0;
+  width: auto;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .main #genderModal,
+#petInfoModal .modal-dialog .modal-content .modal-body .second #genderModal,
+#petInfoModal .modal-dialog .modal-content .modal-body .info #genderModal {
+  color: var(--text-blue);
+  font-size: 1.2rem;
+  padding-left: 0.5rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .main #genderModal::before,
+#petInfoModal .modal-dialog .modal-content .modal-body .second #genderModal::before,
+#petInfoModal .modal-dialog .modal-content .modal-body .info #genderModal::before {
+  content: "- ";
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .second {
+  margin-top: -0.7rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .second #breedModal {
+  margin-right: 0.4rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body .info #colourModal {
+  margin-left: 0.5rem;
+}
+#petInfoModal .modal-dialog .modal-content .modal-body #featuresModal {
+  margin-top: -1rem;
+}

@@ -1,25 +1,6 @@
+import { PetFinder } from './PetFinder.js'
+
 export class UI {
-    addUser(newUser) {
-        const userInfoContainer = document.getElementById('userInfoContainer')
-        const userInfo = document.createElement('div')
-        userInfo.innerHTML = `
-        <p>${newUser.idUser}</p>
-        <h1>${newUser.name}</h1>
-        <p>${newUser.surname}</p>
-        <p>${newUser.number}</p>
-        <p>${newUser.email}</p>
-        <p>${newUser.password}</p>
-        `
-
-        userInfoContainer.appendChild(userInfo)
-    }
-
-    addMessageUserAlredyExists(newUser) {
-        const message = document.getElementById('errorMessage')
-        message.innerHTML = `
-        * Ya existe un usuario con el correo <b>${newUser.email}</b>
-        `
-    }
 
     createCards(pets) {
         const cardContainer = document.getElementById('cardContainer')
@@ -37,7 +18,7 @@ export class UI {
                             <p><i class="far fa-calendar mr"></i>${pets[i].age} años</p>
                             <p><i class="fas fa-plus-circle mr"></i>${pets[i].features}</p>
                             <div class="card-button">
-                                <a class="btn" href="">Ver más</a>
+                                <a class="btn" id="${pets[i].id}">Ver más</a>
                             </div>
                         </div>
                     </div>
@@ -45,6 +26,26 @@ export class UI {
             `
             cardContainer.appendChild(card)
         }
+    }
+
+    insertIntoModalPetInfo(pet) {
+        const petFinder = new PetFinder()
+        $('#petInfoModal').modal('show')
+
+        document.getElementById('nameModal').innerHTML = this.capitalizarPrimeraLetra(pet.name)
+        document.getElementById('genderModal').innerHTML = this.capitalizarPrimeraLetra(pet.gender)
+        document.getElementById('breedModal').innerHTML = `${this.capitalizarPrimeraLetra(pet.breed)} de`
+        document.getElementById('ageModal').innerHTML = petFinder.validateAge(pet.age)
+
+        document.getElementById('colourModal').innerHTML = pet.colour
+        document.getElementById('featuresModal').innerHTML = this.capitalizarPrimeraLetra(pet.features)
+
+        console.log(typeof(pet.colour))
+
+    }
+
+    capitalizarPrimeraLetra(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     showToastMessage(userName) {
@@ -64,6 +65,7 @@ export class UI {
             </div>
         </div>
         `
+        this.createToast()
     }
 
     showSuccessToastMessage(message) {
@@ -83,9 +85,10 @@ export class UI {
             </div>
         </div>
         `
+        this.createToast()
     }
 
-    showToastErrorMessage() {
+    showToastErrorMessage(solution) {
         const toastContainer = document.getElementById('toastContainer')
 
         toastContainer.innerHTML = `
@@ -98,11 +101,19 @@ export class UI {
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
-                    <b>Ha ocurrido un error,</b> inténtalo nuevamente
+                    <b>Ha ocurrido un error,</b> ${solution}
                 </div>
             </div>
         </div>
         `
+        this.createToast()
     }
 
+    createToast() {
+        let toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        let toastList = toastElList.map(function(toastEl) {
+            return new bootstrap.Toast(toastEl)
+        });
+        toastList.forEach(toast => toast.show());
+    }
 }

@@ -102,3 +102,52 @@
         }
     }
 }
+
+#petInfoModal {
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                padding-top: 2rem;
+                img {
+                    border-radius: 2rem;
+                }
+                .main,
+                .second,
+                .info {
+                    display: flex;
+                    flex-wrap: nowrap;
+                    #nameModal {
+                        color: var(--text-blue);
+                        font-weight: 700;
+                        font-size: 1.5rem;
+                        margin-right: 0;
+                        padding-right: 0;
+                        width: auto;
+                    }
+                    #genderModal {
+                        color: var(--text-blue);
+                        font-size: 1.2rem;
+                        padding-left: 0.5rem;
+                        &::before {
+                            content: '- ';
+                        }
+                    }
+                }
+                .second {
+                    margin-top: -0.7rem;
+                    #breedModal {
+                        margin-right: 0.4rem;
+                    }
+                }
+                .info {
+                    #colourModal {
+                        margin-left: 0.5rem;
+                    }
+                }
+                #featuresModal {
+                    margin-top: -1rem;
+                }
+            }
+        }
+    }
+}

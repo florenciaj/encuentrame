@@ -154,20 +154,11 @@ auth.onAuthStateChanged((user) => {
 });
 
 function showToast(result) {
-    createToast()
-    let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-    let toastList = toastElList.map(function(toastEl) {
-        return new bootstrap.Toast(toastEl)
-    });
-    toastList.forEach(toast => toast.show());
-
-    function createToast() {
-        let user = firebase.auth().currentUser;
-        let userName = user.displayName;
-        let ui = new UI();
-        if (result === true)
-            ui.showToastMessage(userName)
-        else
-            ui.showToastErrorMessage()
-    }
+    let user = firebase.auth().currentUser;
+    let userName = user.displayName;
+    let ui = new UI();
+    if (result === true)
+        ui.showToastMessage(userName)
+    else
+        ui.showToastErrorMessage('inténtalo nuevamente')
 };

@@ -1,6 +1,7 @@
 import { Pet } from './Pet.js';
 import { User } from './User.js';
 import { Loss } from './Loss.js';
+import { UI } from './UI.js'
 
 export class PetFinder {
     constructor() {
@@ -97,6 +98,33 @@ export class PetFinder {
         let storageOPets = this.getPets()
         storageOPets.push(newPet)
         localStorage.setItem('petsLocalStorage', JSON.stringify(storageOPets))
+    }
+
+    searchPetById(id) {
+        let allPets = this.getPets()
+        let ui = new UI()
+
+        for (let i = 0; i < allPets.length; i++) {
+            if (allPets[i].id === id)
+                return ui.insertIntoModalPetInfo(allPets[i])
+        }
+        return ui.showToastErrorMessage('no se encuentró la mascota seleccionada')
+    }
+
+    validateAge(age) {
+        if (age > 1 && age < 30)
+            age = `${age} años`
+
+        else if (age == 1)
+            age = `${age} año`
+
+        else if (age > 0 && age < 1)
+            age = `${age} meses`;
+
+        else
+            age
+
+        return age
     }
 
     /* loss methods */
