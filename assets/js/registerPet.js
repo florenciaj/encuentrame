@@ -141,7 +141,7 @@ window.addEventListener('load', function() {
     }
 
     function iteratePetValuesToWrite() {
-        const petValues = ['name', 'type', 'breed', 'age', 'colour', 'gender', 'features', 'place', 'hour', 'date']
+        const petValues = Object.keys(petFinder.getPets())
 
         for (let i = 0; i < petValues.length; i++) {
             writeInfoGiven(petValues[i])
@@ -160,7 +160,7 @@ window.addEventListener('load', function() {
                         nameOutput.innerHTML = nameInput.value
                 });
 
-                if (nameInput.id == 'genderInput' || nameInput.id == 'typeInput') {
+                if (nameInput.id == 'genderInput' || nameInput.id == 'typeInput' || nameInput.id == 'colourInput') {
                     nameInput.addEventListener('change', function() {
                         nameOutput.innerHTML = nameInput.value
                     });
@@ -183,14 +183,14 @@ window.addEventListener('load', function() {
                 }
             }
 
-            /*             function validateAndShowColours(nameOutput) {
-                            let colour = []
-                            let petColours = getPetColour(colour)
-                            for (let i = 0; i < petColours.length; i++) {
-                                const element = petColours[i];
-                                nameOutput.innerHTML = "petColours";
-                            }
-                        } */
+            function validateAndShowColours(nameOutput) {
+                let colour = []
+                let petColours = getPetColour(colour)
+                for (let i = 0; i < petColours.length; i++) {
+                    const element = petColours[i];
+                    nameOutput.innerHTML = "petColours";
+                }
+            }
         };
     }
 
@@ -226,7 +226,7 @@ window.addEventListener('load', function() {
         let hour = document.getElementById('hourInput').value
         let data = document.getElementById('dateInput').value
 
-        let newLoss = new Loss(petFinder.generateNewLossId(), place, hour, data, savedPet)
+        let newLoss = new Loss(petFinder.generateNewLossId(), place, hour, data, savedPet.id)
         petFinder.saveNewLossInLocalStorage(newLoss)
 
         return newLoss

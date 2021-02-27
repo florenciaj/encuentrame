@@ -79,23 +79,10 @@
                     display: flex;
                     justify-content: flex-end;
                     margin-top: 4rem;
-                    a {
-                        background: transparent;
-                        color: var(--bg-blue);
-                        border: 1px solid var(--bg-blue);
-                        line-height: 0;
-                        letter-spacing: 1px;
-                        font-weight: 500;
-                        border-radius: 30px;
-                        padding: 1rem 1rem;
+                    .btn {
                         position: absolute;
                         bottom: 0;
                         margin-bottom: 1rem;
-                        transition: color 0.4s linear;
-                        &:hover {
-                            background: var(--bg-blue);
-                            color: white;
-                        }
                     }
                 }
             }
@@ -116,18 +103,21 @@
                 .info {
                     display: flex;
                     flex-wrap: nowrap;
+                    align-items: center;
                     #nameModal {
                         color: var(--text-blue);
                         font-weight: 700;
                         font-size: 1.5rem;
                         margin-right: 0;
+                        margin-bottom: 0.5rem;
                         padding-right: 0;
                         width: auto;
                     }
                     #genderModal {
                         color: var(--text-blue);
-                        font-size: 1.2rem;
+                        font-size: 1rem;
                         padding-left: 0.5rem;
+                        margin-bottom: 0.3rem;
                         &::before {
                             content: '- ';
                         }
@@ -140,8 +130,10 @@
                     }
                 }
                 .info {
-                    #colourModal {
-                        margin-left: 0.5rem;
+                    p {
+                        b {
+                            margin-right: 0.3rem;
+                        }
                     }
                 }
                 #featuresModal {

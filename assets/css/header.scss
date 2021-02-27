@@ -60,6 +60,38 @@ header {
     }
 }
 
+.btn.small-btn {
+    background: transparent;
+    color: var(--bg-blue);
+    border: 1px solid var(--bg-blue);
+    line-height: 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 1rem 1rem;
+    transition: color 0.4s linear;
+    &:hover {
+        background: var(--bg-blue);
+        color: white;
+    }
+}
+
+.btn.medium-btn {
+    background: (--bg-blue);
+    color: white;
+    line-height: 0;
+    letter-spacing: 1px;
+    font-weight: 500;
+    border-radius: 30px;
+    padding: 1.4rem 2rem;
+    transition: color 0.4s linear;
+    &:hover {
+        background: transparent;
+        color: var(--bg-blue);
+        border: 1px solid var(--bg-blue);
+    }
+}
+
 .hide {
     display: none;
 }

@@ -18,7 +18,7 @@ export class UI {
                             <p><i class="far fa-calendar mr"></i>${pets[i].age} años</p>
                             <p><i class="fas fa-plus-circle mr"></i>${pets[i].features}</p>
                             <div class="card-button">
-                                <a class="btn" id="${pets[i].id}">Ver más</a>
+                                <button class="btn small-btn" id="${pets[i].id}">Ver más</button>
                             </div>
                         </div>
                     </div>
@@ -41,6 +41,15 @@ export class UI {
         document.getElementById('featuresModal').innerHTML = this.capitalizarPrimeraLetra(pet.features)
 
         console.log(typeof(pet.colour))
+
+    }
+
+    insertIntoModalLoosInfo(loss) {
+        const petFinder = new PetFinder()
+
+        document.getElementById('placeModal').innerHTML = this.capitalizarPrimeraLetra(loss.place)
+        document.getElementById('dateModal').innerHTML = loss.date
+        document.getElementById('hourModal').innerHTML = loss.hour
 
     }
 

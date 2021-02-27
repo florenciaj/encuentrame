@@ -105,8 +105,10 @@ export class PetFinder {
         let ui = new UI()
 
         for (let i = 0; i < allPets.length; i++) {
-            if (allPets[i].id === id)
-                return ui.insertIntoModalPetInfo(allPets[i])
+            if (allPets[i].id === id) {
+                ui.insertIntoModalPetInfo(allPets[i])
+                return allPets[i]
+            }
         }
         return ui.showToastErrorMessage('no se encuentró la mascota seleccionada')
     }
@@ -144,6 +146,17 @@ export class PetFinder {
         let storageLosses = this.getLosses()
         storageLosses.push(newLoss)
         localStorage.setItem('lossesLocalStorage', JSON.stringify(storageLosses))
+    }
+
+    searchLossByPetId(id) {
+        let allLosses = this.getLosses()
+        let ui = new UI()
+
+        for (let i = 0; i < allLosses.length; i++) {
+            if (allLosses[i].idPet === id)
+                return ui.insertIntoModalLoosInfo(allLosses[i])
+        }
+        return ui.showToastErrorMessage('no se encuentraron datos sobre la pérdida')
     }
 
 }
