@@ -10,7 +10,7 @@ export class UI {
             card.innerHTML += `
                 <div class="card">
                     <div class="card-img">
-                        <img src="assets/img/${pets[i].photo}" class="card-img-top" alt="...">
+                        <img src="assets/img/${pets[i].photo}" class="card-img-top" alt="${pets[i].name}">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">${pets[i].name}</h5>
@@ -18,7 +18,7 @@ export class UI {
                             <p><i class="far fa-calendar mr"></i>${pets[i].age} años</p>
                             <p><i class="fas fa-plus-circle mr"></i>${pets[i].features}</p>
                             <div class="card-button">
-                                <button class="btn small-btn" id="${pets[i].id}">Ver más</button>
+                                <button class="btn small-btn showModal" data-bs-toggle="modal" data-bs-target="#petInfoModal" id="${pets[i].id}">Ver más</button>
                             </div>
                         </div>
                     </div>
@@ -39,9 +39,7 @@ export class UI {
 
         document.getElementById('colourModal').innerHTML = pet.colour
         document.getElementById('featuresModal').innerHTML = this.capitalizarPrimeraLetra(pet.features)
-
-        console.log(typeof(pet.colour))
-
+        document.getElementById('photoModal').src = "./assets/img/" + pet.photo
     }
 
     insertIntoModalLoosInfo(loss) {

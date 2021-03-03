@@ -157,7 +157,7 @@ function showToast(result) {
     let user = firebase.auth().currentUser;
     let userName = user.displayName;
     let ui = new UI();
-    if (result === true)
+    if (result)
         ui.showToastMessage(userName)
     else
         ui.showToastErrorMessage('inténtalo nuevamente')

@@ -38,7 +38,7 @@ window.addEventListener('load', function() {
                 if (savedPet)
                     resolve('Se ha creado el post con la mascota')
                 else
-                    reject('No se ha podido crear un post con la mascota')
+                    reject(showSuccessMessage('No se ha podido crear un post con la mascota'))
             })
 
             /* saves new Loss */
@@ -50,7 +50,6 @@ window.addEventListener('load', function() {
                         reject('No se guardaron los datos sobre el extravío, inténtelo nuevamente')
                 })
 
-                /* saves new Loss into missed pet*/
             }).then(() => {
                 showSuccessMessage('Ya se ha creado el post');
             }).catch(error => {
@@ -74,16 +73,15 @@ window.addEventListener('load', function() {
         let breed = document.getElementById('breedInput').value
         let age = document.getElementById('ageInput').value
         let gender = document.getElementById('genderInput').value
-        let type = document.getElementById('typeInput').value
-        let colour = []
-        colour = getPetColour(colour);
+        let type = document.getElementById('petTypeInput').value
+        let colour = getPetColour()
         let features = document.getElementById('featuresInput').value
         let photo
-        console.log(features)
+
         let petValues = [name, breed, age, gender, type, colour, features]
         if (checkIfPetHasAllValues(petValues)) {
             photo = setPetPhoto(type)
-            const state = "Perdido"
+            const state = 'Perdido'
             return saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, features)
         }
         return false;
@@ -106,8 +104,6 @@ window.addEventListener('load', function() {
         let allDataIsComplete = true
 
         for (let i = 0; i < petValues.length; i++) {
-            console.log(petValues[i])
-
             if (petValues[i] == null || petValues[i] == "")
                 allDataIsComplete = false
         }
@@ -115,34 +111,38 @@ window.addEventListener('load', function() {
     }
 
     function saveAndAddNewPet(name, type, breed, age, colour, gender, photo, state, features) {
-        console.log('features en save and add new pet' + features)
         let newPet = new Pet(petFinder.generateNewPetId(), name, type, breed, age, colour, gender, photo, state, features)
         petFinder.saveNewPetInLocalStorage(newPet)
         return newPet
     }
 
-    function getPetColour(colour) {
-        let blackColour = document.getElementById('blackColour')
-        let whiteColour = document.getElementById('whiteColour')
-        let brownColour = document.getElementById('brownColour')
-        let greyColour = document.getElementById('greyColour')
-        let creamColour = document.getElementById('creamColour')
+    let petColous = []
 
-        let petColours = [blackColour, whiteColour, brownColour, greyColour, creamColour]
-        for (let i = 0; i < petColours.length; i++) {
-            if (petColours[i].checked)
-                colour.push(petColours[i].value)
+    function getColours() {
+        document.querySelectorAll('.form-check-input').forEach(function(el) {
+            petColous.push(el)
+        });
+        return petColous
+    }
+
+    function getPetColour() {
+        let arrayColous = getColours()
+
+        for (let i = 0; i < arrayColous.length; i++) {
+            if (arrayColous[i].checked) {
+                if (!checkedColours.includes(arrayColous[i].value))
+                    checkedColours.push(arrayColous[i].value)
+            }
         }
-        if (colour.length === 0)
-            return colour = 'No se reconoce el color'
+        if (checkedColours.length === 0)
+            return checkedColours = 'No se reconoce el color'
 
         else
-            return colour
+            return checkedColours
     }
 
     function iteratePetValuesToWrite() {
-        const petValues = Object.keys(petFinder.getPets())
-
+        const petValues = Object.keys(new Pet())
         for (let i = 0; i < petValues.length; i++) {
             writeInfoGiven(petValues[i])
         }
@@ -151,7 +151,6 @@ window.addEventListener('load', function() {
             if (document.getElementById(`${inputName}Input`)) {
                 let nameInput = document.getElementById(`${inputName}Input`)
                 let nameOutput = document.getElementById(`${inputName}Output`)
-                let textWarning = document.getElementById('textWarning')
                 let colour = [];
                 nameInput.addEventListener('keyup', function() {
                     if (nameOutput.id == 'ageOutput')
@@ -160,7 +159,7 @@ window.addEventListener('load', function() {
                         nameOutput.innerHTML = nameInput.value
                 });
 
-                if (nameInput.id == 'genderInput' || nameInput.id == 'typeInput' || nameInput.id == 'colourInput') {
+                if (nameInput.id == 'genderInput' || nameInput.id == 'petTypeInput') {
                     nameInput.addEventListener('change', function() {
                         nameOutput.innerHTML = nameInput.value
                     });
@@ -182,16 +181,39 @@ window.addEventListener('load', function() {
                     nameOutput.innerHTML = '';
                 }
             }
-
-            function validateAndShowColours(nameOutput) {
-                let colour = []
-                let petColours = getPetColour(colour)
-                for (let i = 0; i < petColours.length; i++) {
-                    const element = petColours[i];
-                    nameOutput.innerHTML = "petColours";
-                }
-            }
+            //
         };
+    }
+    let arrayColous = []
+    let checkedColours = []
+
+    function getSelectedColour() {
+        document.querySelectorAll('.form-check-input').forEach(function(el) {
+
+            let colour = document.getElementById(el.id)
+            arrayColous.push(colour)
+
+            for (let i = 0; i < arrayColous.length; i++) {
+                colour.addEventListener('change', function() {
+                    if (arrayColous[i].checked) {
+
+                        if (!checkedColours.includes(arrayColous[i].value))
+                            checkedColours.push(arrayColous[i].value)
+
+
+                        let colourOutput = document.getElementById('colourOutput')
+                        colourOutput.innerHTML = checkedColours
+                    } else {
+                        console.log(arrayColous[i])
+
+                        checkedColours.splice(checkedColours.indexOf(arrayColous[i].value), 1)
+                        colourOutput.innerHTML = checkedColours
+
+                    }
+
+                })
+            }
+        });
     }
 
     function iterateLossValuesToWrite() {
@@ -232,7 +254,7 @@ window.addEventListener('load', function() {
         return newLoss
     }
 
-
+    getSelectedColour()
     addNewMissedPet()
     iteratePetValuesToWrite()
     iterateLossValuesToWrite()

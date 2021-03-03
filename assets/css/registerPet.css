@@ -1,19 +1,10 @@
-:root {
-  --pink: #ff8b7b;
-  --pink-hover: #ff7967;
-  --light-pink: #fef7ed;
-  --bg-blue: #213fad;
-  --text-blue: #3a54b4;
-  --light: #f8f9fd;
-}
-
 body {
   background-color: var(--bg-blue);
 }
 
 .registration .img-side .row {
-  padding-right: 6rem;
-  padding-left: 6rem;
+  padding-right: 4rem;
+  padding-left: 4rem;
 }
 .registration .img-side .row .card {
   border: 0;

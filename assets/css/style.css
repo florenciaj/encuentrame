@@ -33,6 +33,10 @@
   color: white;
 }
 
+.info-pets {
+  background-color: var(--light);
+}
+
 .register-pet .container .row .img-container img {
   width: 90%;
 }
@@ -48,11 +52,15 @@
 .pets .card {
   border: 0;
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+  height: 100%;
 }
 .pets .card .card-img {
   overflow: hidden;
+  max-height: 20rem;
 }
 .pets .card .card-img img {
+  max-height: 20rem;
+  object-fit: cover;
   transition: all ease 0.3s;
   cursor: pointer;
 }

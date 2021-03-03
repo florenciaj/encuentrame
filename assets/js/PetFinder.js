@@ -14,11 +14,11 @@ export class PetFinder {
         ]
 
         this.pets = [
-            new Pet(1, 'Toby', 'Perro', 'Rottweiler', 1, 'Negro y marrón', 'M', 'rottweiler.jpg', 'Perdido', 'Tiene un collar rojo'),
-            new Pet(2, 'Blanca', 'Gato', 'No aplica', 2, 'Blanco', 'H', 'gato_blanco.jpg', 'Perdido', 'Un ojo es verde y otro azul'),
-            new Pet(3, 'Coco', 'Gato', 'Siamés', 4, 'Gris y negro', 'M', 'siames.jpg', 'Perdido', 'Tiene una mancha blanca en la oreja izquierda'),
-            new Pet(4, 'Oreo', 'Conejo', 'Holandés', 0.5, 'Negro y blanco', 'H', 'conejo_holandes.jpg', 'Perdido', 'Sus orejas son caidas'),
-            new Pet(5, 'Milo', 'Perro', 'Caniche', 8, 'Marrón', 'M', 'caniche.jpg', 'Perdido', 'Tiene un tapado verde')
+            new Pet(1, 'Toby', 'Perro', 'Rottweiler', 1, 'Negro y marrón', 'Macho', 'rottweiler.jpg', 'Perdido', 'Tiene un collar rojo'),
+            new Pet(2, 'Blanca', 'Gato', 'No aplica', 2, 'Blanco', 'Hembra', 'gato_blanco.jpg', 'Perdido', 'Un ojo es verde y otro azul'),
+            new Pet(3, 'Coco', 'Gato', 'Siamés', 4, 'Gris y negro', 'Macho', 'siames.jpg', 'Perdido', 'Tiene una mancha blanca en la oreja izquierda'),
+            new Pet(4, 'Oreo', 'Conejo', 'Holandés', 0.5, 'Negro y blanco', 'Hembra', 'conejo_holandes.jpg', 'Perdido', 'Sus orejas son caidas'),
+            new Pet(5, 'Milo', 'Perro', 'Caniche', 8, 'Marrón', 'Macho', 'caniche.jpg', 'Perdido', 'Tiene un tapado verde')
         ]
 
         this.losses = [
@@ -87,11 +87,22 @@ export class PetFinder {
     }
 
     getPets() {
-        if (localStorage.getItem('petsLocalStorage') !== '')
+        if (localStorage.getItem('petsLocalStorage') !== null)
             return JSON.parse(localStorage.getItem('petsLocalStorage'))
 
         localStorage.setItem('petsLocalStorage', JSON.stringify(this.pets))
         return this.pets
+    }
+
+    getPetType(petType) {
+        let pets = this.getPets()
+        let dogArray = []
+
+        for (let i = 0; i < pets.length; i++) {
+            if (pets[i].petType == petType)
+                dogArray.push(pets[i])
+        }
+        return dogArray
     }
 
     saveNewPetInLocalStorage(newPet) {
@@ -105,7 +116,7 @@ export class PetFinder {
         let ui = new UI()
 
         for (let i = 0; i < allPets.length; i++) {
-            if (allPets[i].id === id) {
+            if (allPets[i].id == id) {
                 ui.insertIntoModalPetInfo(allPets[i])
                 return allPets[i]
             }
@@ -135,7 +146,7 @@ export class PetFinder {
     }
 
     getLosses() {
-        if (localStorage.getItem('lossesLocalStorage') !== '')
+        if (localStorage.getItem('lossesLocalStorage') !== null)
             return JSON.parse(localStorage.getItem('lossesLocalStorage'))
 
         localStorage.setItem('lossesLocalStorage', JSON.stringify(this.losses))
@@ -153,10 +164,19 @@ export class PetFinder {
         let ui = new UI()
 
         for (let i = 0; i < allLosses.length; i++) {
-            if (allLosses[i].idPet === id)
+            if (allLosses[i].idPet == id)
                 return ui.insertIntoModalLoosInfo(allLosses[i])
         }
         return ui.showToastErrorMessage('no se encuentraron datos sobre la pérdida')
+    }
+
+    /* user methods */
+    searchUserByPetId(id) {
+        let user = firebase.auth().currentUser;
+        let userName = user.displayName
+        let userEmail = user.email
+
+        console.log(userEmail)
     }
 
 }
