@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/sign.css">
+
+<section class="sign-in">
+    <div class="container my-5">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="/img/signin_form.jpg" alt="Imagen iniciar sesión"></figure>
+                <a href="/users/signup" class="signup-image-link">Crear cuenta</a>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title mb-0">Iniciar sesión</h2>
+                <p class="mb-5">¡Hola! Que bueno volver a verte</p>
+                <form method="POST" action="/users/signin" class="register-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="correo@gmail.com" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" />
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="btn btn-medium mt-3"
+                            value="Iniciar sesión" />
+                    </div>
+                </form>
+                <div class="social-login">
+                    <span class="social-label">O ingresar con</span>
+                    <ul class="socials">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-google"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
