@@ -14,7 +14,7 @@ const LossSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    pet: {
+    petId: {
         type: String,
         required: true
     }

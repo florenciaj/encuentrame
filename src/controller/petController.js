@@ -1,4 +1,5 @@
 const PetModel = require('../models/Pet')
+const LossModel = require('../models/Loss')
 
 module.exports = {
 
@@ -20,14 +21,19 @@ module.exports = {
     },
 
     async postNewPet(req, res) {
-        const { colour, name, breed, age, gender, petType, features } = req.body
+        const { colour, name, breed, age, gender, petType, features, place, hour, date } = req.body
         const photo = req.file.filename
 
         if (colour && name && breed && age && gender && petType && features && photo) {
             const userId = req.user._id
             const newPet = new PetModel({ name, petType, breed, age, colour, gender, photo, features, userId })
             await newPet.save()
-            res.render('index   ')
+
+            const petId = newPet._id
+            const newLoss = new LossModel({ place, hour, date, petId })
+            await newLoss.save()
+
+            res.render('index')
                 // return res.status(201).json({ pet: req.body })
         } else {
             res.status(400).json({ error: "Not enough properties" })
