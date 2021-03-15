@@ -1,7 +1,7 @@
 const stepOneContainer = document.getElementById('stepOneContainer')
 const stepTwoContainer = document.getElementById('stepTwoContainer')
 const btnSubmit = document.getElementById('btnSubmit')
-let checkedInputs = 1
+let checkedInputs = 0
 
 const validInputs = {
     name: false,
@@ -11,32 +11,29 @@ const validInputs = {
     petType: false,
     features: false,
     colour: false,
+    photo: false,
     place: false,
     hour: false,
-    time: false
+    date: false
 }
 
 /* NEXT AND PREVIOUS BUTTONS */
 const btnNext = document.getElementById('btnNext')
 const btnPrevious = document.getElementById('btnPrevious')
+const formMessage1 = document.getElementById('formMessage1')
+const formMessage2 = document.getElementById('formMessage2')
 
 btnNext.addEventListener('click', function() {
-    const checkboxs = document.querySelectorAll('#submitFormNewPet input[type="checkbox"]')
-    const formMessage = document.getElementById('formMessage1')
-
-    if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features) {
-        checkboxs.forEach((checkbox) => {
-            checkbox.addEventListener('change', checkBoxValidation)
-        })
-        if (checkedInputs > 1) {
+    if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo) {
+        if (checkedInputs) {
             stepOneContainer.classList.add('hide')
             stepTwoContainer.classList.remove('hide')
             btnSubmit.classList.remove('hide')
         } else {
-            showErrorMessage(formMessage)
+            showErrorMessage(formMessage1)
         }
     } else {
-        showErrorMessage(formMessage)
+        showErrorMessage(formMessage1)
     }
 })
 
@@ -64,6 +61,7 @@ window.addEventListener('load', () => {
     const inputs = document.querySelectorAll('#submitFormNewPet input')
     const selects = document.querySelectorAll('#submitFormNewPet select')
     const textareas = document.querySelectorAll('#submitFormNewPet textarea')
+    const checkboxs = document.querySelectorAll('#submitFormNewPet input[type="checkbox"]')
 
     /* INPUTS VALIDATION */
     function formValidation(e) {
@@ -113,6 +111,7 @@ window.addEventListener('load', () => {
         }
     }
 
+    /* field listeners */
     inputs.forEach((input) => {
         input.addEventListener('keyup', formValidation)
         input.addEventListener('blur', formValidation)
@@ -128,10 +127,41 @@ window.addEventListener('load', () => {
         textarea.addEventListener('blur', textareaValidation)
     })
 
+    checkboxs.forEach((checkbox) => {
+        checkbox.addEventListener('change', checkBoxValidation)
+    })
 
     /* SUBMIT FORM VALIDATION */
-    form.addEventListener('submit', (e) => {})
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
 
+        if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo && validInputs.place && validInputs.date && validInputs.hour) {
+            form.submit()
+        } else {
+            showErrorMessage(formMessage2)
+        }
+    })
+
+
+    /* PREVIEW IMAGE */
+    document.getElementById("photo").onchange = function(e) {
+        let reader = new FileReader()
+        reader.readAsDataURL(e.target.files[0]) // se lee el archivo subido y se pasa al fileReader
+
+        reader.onload = function() { //cuando la img esté lista se ejecuta
+            let preview = document.getElementById('preview')
+            let photo = document.createElement('img')
+            photo.classList.add('w-100')
+
+            photo.src = reader.result
+            preview.innerHTML = ''
+            preview.append(photo)
+        }
+    }
+
+    /* PREVIEW CARD CONTENT */
+    let arrayColous = []
+    let checkedColours = []
 
     function iteratePetValuesToWrite() {
         const petValues = ['name', 'breed', 'gender', 'age', 'petType', 'features']
@@ -176,8 +206,6 @@ window.addEventListener('load', () => {
             //
         };
     }
-    let arrayColous = []
-    let checkedColours = []
 
     function getSelectedColour() {
         document.querySelectorAll('.form-check-input').forEach(function(el) {

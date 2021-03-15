@@ -8,7 +8,9 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-img">
-                                <img src="/img/siames.jpg" class="card-img-top" alt="...">
+                                <div id="preview">
+                                    <i class="fas fa-paw"></i>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="nameOutput"><span class="text-secondary">nombre</span></h5>
@@ -74,7 +76,7 @@
                 <p>Se hará un post de la mascota para que otros puedan conocerla</p>
 
                 <div class="registration-form">
-                    <form id="submitFormNewPet" action="/api/pet/create-pet" method="POST" enctype="multipart/form-data">
+                    <form id="submitFormNewPet" action="/api/pet/create-pet" method="POST" enctype="multipart/form-data" >
 
                         <div class="step-one row g-3 mt-4" id="stepOneContainer">
                             <div class="col-md-6" id="nameGroup">
@@ -181,7 +183,7 @@
                             </div>
                             <div class="formMessage mt-2" id="formMessage1">
                                 <p><i class="fas fa-exclamation-triangle"></i>
-                                    <b>Error:</b> Completar el formulario correctamente
+                                    <b>Error:</b> Completar el formulario correctamente.Completar todos los datos
                                 </p>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
@@ -218,9 +220,9 @@
                                 <p class="inputError">Seleccionar un día válido. La fecha no puede ser posterior a la
                                     actual</p>
                             </div>
-                            <div class="formMessage mt-2" id="formMessage1">
+                          <div class="formMessage mt-2" id="formMessage2">
                                 <p><i class="fas fa-exclamation-triangle"></i>
-                                    <b>Error:</b> Completar el formulario correctamente
+                                    <b>Error:</b> Completar el formulario correctamente.Completar todos los datos
                                 </p>
                             </div>
                             <div class="col-12 d-flex justify-content-start">
@@ -230,7 +232,6 @@
                                 </button>
                             </div>
                         </div>
-
                         <div class="col-12 register-btn-container d-flex justify-content-end">
                             <button type="submit" class="btn mt-5 hide" id="btnSubmit">Publicar</button>
                         </div>

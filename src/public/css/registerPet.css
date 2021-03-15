@@ -17,12 +17,18 @@ body {
     max-height: 20rem;
 }
 
-.registration .img-side .row .card .card-img img {
-    transition: all ease 0.3s;
-    cursor: pointer;
-    max-height: 20rem;
-    object-fit: cover;
-    object-position: center center;
+.registration .img-side .row .card .card-img #preview {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: var(--light-pink);
+    height: 20rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.registration .img-side .row .card .card-img #preview i {
+    font-size: 5rem;
 }
 
 .registration .img-side .row .card .card-img img:hover {

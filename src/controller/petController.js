@@ -27,11 +27,11 @@ module.exports = {
             const userId = req.user._id
             const newPet = new PetModel({ name, petType, breed, age, colour, gender, photo, features, userId })
             await newPet.save()
-            return res.status(201).json({ pet: req.body })
+            res.render('index   ')
+                // return res.status(201).json({ pet: req.body })
         } else {
             res.status(400).json({ error: "Not enough properties" })
         }
-
     },
 
     async changePetValues(req, res) {
