@@ -28,11 +28,12 @@ const PetSchema = new Schema({
     },
     photo: {
         type: String,
-        required: true
+        required: false
     },
     state: {
         type: String,
-        required: true
+        required: true,
+        default: "Perdido"
     },
     features: {
         type: String,

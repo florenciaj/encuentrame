@@ -35,6 +35,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
+app.use(express.json())
 
 
 // settings
@@ -51,11 +52,8 @@ app.use((req, res, next) => { //todas las vistas tienen acceso a flash, por lo q
 
 // routes
 //le dice al servidor donde están las rutas que va a usar
-app.use(require('./routes/index'))
-app.use(require('./routes/users'))
-
-
-// static files
+const apiRoute = require('./api/routes/routes')
+app.use('/', apiRoute)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // server is listenning
