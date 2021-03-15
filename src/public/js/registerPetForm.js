@@ -130,9 +130,7 @@ window.addEventListener('load', () => {
 
 
     /* SUBMIT FORM VALIDATION */
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
-    })
+    form.addEventListener('submit', (e) => {})
 
 
     function iteratePetValuesToWrite() {

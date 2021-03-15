@@ -19,18 +19,17 @@ module.exports = {
         return res.status(200).json({ petFound })
     },
 
-    postNewPet(req, res) {
+    async postNewPet(req, res) {
         const { colour, name, breed, age, gender, petType, features } = req.body
+        const photo = req.file.filename
 
-        if (colour && name && breed && age && gender && petType && features) {
+        if (colour && name && breed && age && gender && petType && features && photo) {
             const userId = req.user._id
-            const newPet = new PetModel({ name, breed, age, gender, petType, features, colour, userId })
-            newPet.save()
+            const newPet = new PetModel({ name, petType, breed, age, colour, gender, photo, features, userId })
+            await newPet.save()
             return res.status(201).json({ pet: req.body })
         } else {
-            errors.push({ text: 'Deben completarse todos los campos' })
             res.status(400).json({ error: "Not enough properties" })
-                //res.send('/')
         }
 
     },

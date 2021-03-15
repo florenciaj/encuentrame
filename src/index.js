@@ -6,6 +6,8 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
+const multer = require('multer')
+const uuid = require('uuid') //se requiere la versión 4 para obtener un id aleatorio
 
 // initializations
 const app = express()
@@ -36,7 +38,15 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use(express.json())
-
+app.use(express.urlencoded({ extended: false })) //para entender que datos está enviando el formulario
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, 'public/img/upload'),
+    filename: (req, file, cb, filename) => {
+        console.log(file);
+        cb(null, uuid.v4() + path.extname(file.originalname));
+    }
+})
+app.use(multer({ storage }).single('photo'));
 
 // settings
 

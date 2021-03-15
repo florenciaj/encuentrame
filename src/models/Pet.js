@@ -28,7 +28,7 @@ const PetSchema = new Schema({
     },
     photo: {
         type: String,
-        required: false
+        required: true
     },
     state: {
         type: String,

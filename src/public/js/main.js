@@ -25,7 +25,7 @@ function getPets(items) {
         card.innerHTML += `
             <div class="card">
                 <div class="card-img">
-                    <img src="/img/${items[i].photo}" class="card-img-top" alt="">
+                    <img src="/img/upload/${items[i].photo}" class="card-img-top" alt="">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${items[i].name}</h5>
