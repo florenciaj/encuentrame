@@ -1,7 +1,7 @@
 const stepOneContainer = document.getElementById('stepOneContainer')
 const stepTwoContainer = document.getElementById('stepTwoContainer')
 const btnSubmit = document.getElementById('btnSubmit')
-let checkedInputs = 0
+let checkedInputs = 1
 
 const validInputs = {
     name: false,
@@ -10,7 +10,10 @@ const validInputs = {
     gender: false,
     petType: false,
     features: false,
-    colour: false
+    colour: false,
+    place: false,
+    hour: false,
+    time: false
 }
 
 /* NEXT AND PREVIOUS BUTTONS */
@@ -19,13 +22,13 @@ const btnPrevious = document.getElementById('btnPrevious')
 
 btnNext.addEventListener('click', function() {
     const checkboxs = document.querySelectorAll('#submitFormNewPet input[type="checkbox"]')
-    const formMessage = document.getElementById('formMessage')
+    const formMessage = document.getElementById('formMessage1')
 
     if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features) {
         checkboxs.forEach((checkbox) => {
             checkbox.addEventListener('change', checkBoxValidation)
         })
-        if (checkedInputs) {
+        if (checkedInputs > 1) {
             stepOneContainer.classList.add('hide')
             stepTwoContainer.classList.remove('hide')
             btnSubmit.classList.remove('hide')
@@ -46,7 +49,7 @@ function showErrorMessage(formMessage) {
 
 function checkBoxValidation(e) {
     if (e.target.checked)
-        checkedInputs += 1
+        return checkedInputs += 1
 }
 
 btnPrevious.addEventListener('click', function() {
@@ -66,6 +69,7 @@ window.addEventListener('load', () => {
     function formValidation(e) {
         const regexText = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
         const regexNumber = /^\d+$/
+        const regexAddress = /^[a-zA-ZÀ-ÿ\s\d]+$/
 
         switch (e.target.name) { //obtiene que se está clickeando
             case 'name':
@@ -77,10 +81,13 @@ window.addEventListener('load', () => {
             case 'age':
                 validateInput(regexNumber, e.target)
                 break;
+            case 'place':
+                validateInput(regexAddress, e.target)
+                break;
         }
     }
 
-    function selectValidation(e) {
+    function hasAValue(e) {
         if (e.target.value)
             validInput(e.target)
         else
@@ -109,10 +116,11 @@ window.addEventListener('load', () => {
     inputs.forEach((input) => {
         input.addEventListener('keyup', formValidation)
         input.addEventListener('blur', formValidation)
+        input.addEventListener('change', hasAValue)
     })
 
     selects.forEach((select) => {
-        select.addEventListener('change', selectValidation)
+        select.addEventListener('change', hasAValue)
     })
 
     textareas.forEach((textarea) => {

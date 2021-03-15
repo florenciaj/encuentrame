@@ -156,8 +156,8 @@
                                             name="colour" value="{{marron}}">
                                         <label class="form-check-label" for="brownColour">Marrón</label>
                                     </div>
-                                    <div class="form-check" name="colour" value="{{gris}}">
-                                        <input class="form-check-input" type="checkbox" value="gris" id="greyColour">
+                                    <div class="form-check" name="colour" >
+                                        <input class="form-check-input" type="checkbox" value="gris" id="greyColour" value="{{gris}}">
                                         <label class="form-check-label" for="greyColour">Gris</label>
                                     </div>
                                     <div class="form-check">
@@ -165,36 +165,53 @@
                                             name="colour" value="{{crema}}">
                                         <label class="form-check-label" for="creamColour">Crema</label>
                                     </div>
+                                    <i class="stateValidation fas fa-times-circle"></i>
                                 </div>
                                 <p class="inputError">Debe elegir al menos un color</p>
                             </div>
-                            <div class="formMessage mt-2" id="formMessage">
-                                <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Completar el formulario
-                                    correctamente</p>
+                            <div class="formMessage mt-2" id="formMessage1">
+                                <p><i class="fas fa-exclamation-triangle"></i>
+                                    <b>Error:</b> Completar el formulario correctamente
+                                </p>
                             </div>
                             <div class="col-12 d-flex justify-content-end">
                                 <button class="btn mt-2" id="btnNext" type="button">Siguiente
                                     <i class="fas fa-chevron-right ml-1"></i>
                                 </button>
                             </div>
-
                         </div>
 
                         <div class="step-two row g-3 mt-4 hide" id="stepTwoContainer">
-                            <div class="col-12">
+                            <div class="col-12" id="placeGroup">
                                 <label for="place" class="form-label">Lugar</label>
-                                <input type="text" class="form-control" id="placeInput"
-                                    placeholder="Zona en la que se perdió" name="place" value="{{place}}" required="">
+                                <div class="inputGroup">
+                                    <input type="text" class="form-control" id="placeInput"
+                                        placeholder="Zona en la que se perdió" name="place" value="{{place}}">
+                                    <i class="stateValidation fas fa-times-circle"></i>
+                                </div>
+                                <p class="inputError">Ingresar una dirección válida</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" id="hourGroup">
                                 <label for="hour" class="form-label">Hora</label>
-                                <input type="time" class="form-control" id="hourInput" name="hour" value="{{hour}}"
-                                    required="">
+                                <div class="inputGroup">
+                                    <input type="time" class="form-control" id="hourInput" name="hour" value="{{hour}}">
+                                    <i class="stateValidation fas fa-times-circle"></i>
+                                </div>
+                                <p class="inputError">Seleccionar un horario</p>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" id="dateGroup">
                                 <label for="date" class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="dateInput" name="date" value="{{date}}"
-                                    required="">
+                                <div class="inputGroup">
+                                    <input type="date" class="form-control" id="dateInput" name="date" value="{{date}}">
+                                    <i class="stateValidation fas fa-times-circle"></i>
+                                </div>
+                                <p class="inputError">Seleccionar un día válido. La fecha no puede ser posterior a la
+                                    actual</p>
+                            </div>
+                            <div class="formMessage mt-2" id="formMessage1">
+                                <p><i class="fas fa-exclamation-triangle"></i>
+                                    <b>Error:</b> Completar el formulario correctamente
+                                </p>
                             </div>
                             <div class="col-12 d-flex justify-content-start">
                                 <button class="btn" id="btnPrevious" type="button">
@@ -203,6 +220,7 @@
                                 </button>
                             </div>
                         </div>
+
                         <div class="col-12 register-btn-container d-flex justify-content-end">
                             <button type="submit" class="btn mt-5 hide" id="btnSubmit">Publicar</button>
                         </div>
