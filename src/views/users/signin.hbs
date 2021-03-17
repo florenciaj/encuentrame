@@ -1,5 +1,14 @@
 <link rel="stylesheet" href="/css/sign.css">
 
+<section class="start" id="start">
+    <div class="container my-5">
+        <div class="text p-5">
+            <h3>Ya iniciaste sesión</h3>
+            <h6>Empezá a usar la página <a href="/">aquí</a></h6>
+        </div>
+    </div>
+</section>
+
 <section class="sign-in">
     <div class="container my-5">
         <div class="signin-content">
@@ -11,7 +20,7 @@
             <div class="signin-form">
                 <h2 class="form-title mb-0">Iniciar sesión</h2>
                 <p class="mb-5">¡Hola! Que bueno volver a verte</p>
-                <form method="POST" action="/signin" class="register-form">
+                <form method="POST" action="/signin" class="register-form" id="signInForm">
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email" placeholder="correo@gmail.com" />
@@ -28,9 +37,9 @@
                 <div class="social-login">
                     <span class="social-label">O ingresar con</span>
                     <ul class="socials">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li id="googleAuth"><a href="#"><i class="fab fa-google"></i></a></li>
+                        <li id="facebookAuth"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-google"></i></a></li>
                     </ul>
                 </div>
             </div>

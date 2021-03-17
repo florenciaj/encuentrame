@@ -13,6 +13,10 @@ body {
     font-family: "Work Sans", sans-serif;
 }
 
+a {
+    color: var(--text-blue);
+}
+
 header {
     background-color: var(--light-pink);
     padding: 0.5rem;

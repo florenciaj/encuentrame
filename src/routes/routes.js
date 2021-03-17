@@ -12,9 +12,8 @@ router.get('/signup', (req, res) => {
     res.render('users/signup')
 })
 
-router.get('/logout', (req, res) => {
-    req.logout()
-    res.redirect('/')
+router.get('/publicar-mascota', (req, res) => {
+    res.render('pets/registerPet')
 })
 
 module.exports = router

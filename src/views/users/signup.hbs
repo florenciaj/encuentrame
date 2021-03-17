@@ -1,39 +1,47 @@
 <link rel="stylesheet" href="/css/sign.css">
 
+<section class="start" id="start">
+    <div class="container my-5">
+        <div class="text p-5">
+            <h3>Ya te registraste</h3>
+            <h6>Empezá a usar la página <a href="/">aquí</a></h6>
+        </div>
+    </div>
+</section>
+
 <section class="signup">
     <div class="container my-5">
         <div class="signup-content">
             <div class="signup-form">
                 <h2 class="form-title">Registrarse</h2>
-                <form method="POST" class="/signup" id="register-form">
+                <form method="POST" action="" id="signUpForm">
                     <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" name="name" id="name" placeholder="Tu nombre" value="{{name}}" />
+                        <label for="name" class="form-label">Nombre</label>
+                        <input class="form-control" type="text" name="name" id="name" placeholder="Tu nombre" value="{{name}}" />
                     </div>
                     <div class="form-group">
                         <label for="number">Número de contacto</label>
-                        <input type="number" name="number" id="number" placeholder="Tu número" value="{{number}}" />
+                        <input class="form-control" type="number" name="number" id="number" placeholder="Tu número" value="{{number}}" />
                     </div>
                     <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" name="email" id="email" placeholder="correo@gmail.com" value="{{email}}" />
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="correo@gmail.com" value="{{email}}" />
                     </div>
                     <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" name="password" id="password" placeholder="Tu contraseña"
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Tu contraseña"
                             value="{{password}}" />
                         <small class="text-secondary">*Debe incluir al menos 4 caracteres</small>
                     </div>
                     <div class="form-group">
-                        <label for="confirm_password">Repetir contraseña</label>
-                        <input type="password" name="confirm_password" id="confirm_password"
+                        <label for="confirm_password" class="form-label">Repetir contraseña</label>
+                        <input class="form-control" type="password" name="confirm_password" id="confirm_password"
                             value="{{confirm_password}}" />
                     </div>
-                    <div class="form-group">
-                        <input type="checkbox" class="agree-term" name="conditions" id="conditions" value="true" />
-                        <label for="conditions" class="label-agree-term">
-                            Acepto los <a href="https://www.termsfeed.com/live/61361917-69c1-4a3e-b722-45c72a1db8fc"
-                                class="term-service">Términos y condiciones</a></label>
+                    <div class="form-group d-flex justify-space-between">
+                        <input type="checkbox" class="agree-term form-check-input" name="conditions" id="conditions" value="true" />
+                        <label for="conditions" class="label-agree-term form-label">
+                            Acepto los <a href="https://www.termsfeed.com/live/61361917-69c1-4a3e-b722-45c72a1db8fc">Términos y Condiciones</a></label>
                     </div>
                     <div class="form-group form-button">
                         <input type="submit" name="signup" id="signup" class="btn medium-btn" value="Registrarse" />
