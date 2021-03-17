@@ -1,18 +1,15 @@
 require('dotenv').config()
 const express = require('express')
 const path = require('path')
-const exphbs = require('express-handlebars')
-const methodOverride = require('method-override')
 const session = require('express-session')
+const exphbs = require('express-handlebars')
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access')
 const flash = require('connect-flash')
-const passport = require('passport')
 const multer = require('multer')
 const uuid = require('uuid') //se requiere la versión 4 para obtener un id aleatorio
 
 // initializations
 const app = express()
-require('./database')
-require('./config/passport')
 
 // settings
 app.set('port', process.env.PORT || 3000) //se configura el puerto
@@ -28,14 +25,11 @@ app.set('view engine', '.hbs') //indica el motor de las vistas
 
 // middlewares
 app.use(express.urlencoded({ extended: false })) //express.urlencoded() sirve para entender la info de un formulario
-app.use(methodOverride('_method')) //para que el formulario también tenga DELETE y PUT
 app.use(session({
     secret: 'mysecretapp',
     resave: true,
     saveUninitialized: true
 }))
-app.use(passport.initialize())
-app.use(passport.session())
 app.use(flash())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false })) //para entender que datos está enviando el formulario
@@ -62,8 +56,8 @@ app.use((req, res, next) => { //todas las vistas tienen acceso a flash, por lo q
 
 // routes
 //le dice al servidor donde están las rutas que va a usar
-const apiRoute = require('./api/routes/routes')
-app.use('/', apiRoute)
+const route = require('./routes/routes')
+app.use('/', route)
 app.use(express.static(path.join(__dirname, 'public')))
 
 // server is listenning

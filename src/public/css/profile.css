@@ -1,0 +1,24 @@
+.pets .card .card-body .card-text .card-button .btn {
+    position: relative;
+}
+
+.pets .card .card-body .card-text .card-button .editBtn {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.pets .card .card-body .card-text .card-button .editBtn:hover {
+    color: white !important;
+}
+
+.pets .card .card-body .card-text .card-button .deleteBtn {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border: 1px solid #ee4e4e;
+    color: #ee4e4e;
+}
+
+.pets .card .card-body .card-text .card-button .deleteBtn:hover {
+    background: #ee4e4e;
+    color: white !important;
+}
