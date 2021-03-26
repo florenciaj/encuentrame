@@ -349,3 +349,9 @@ header .collapse .navbar-nav .nav-item i {
     font-size: 0.6rem;
     padding: 0.96rem 1rem;
 }
+
+
+/* NAVIGATION / HEADER */
+#signInBtn, #signOutBtn, #start, #profilBtn, #postPetBtn{
+    display: none;
+}

@@ -8,18 +8,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
     const signInBtn = document.getElementById('signInBtn')
     const signOutBtn = document.getElementById('signOutBtn')
     const start = document.getElementById('start')
+    const profilBtn = document.getElementById('profilBtn')
+    const postPetBtn = document.getElementById('postPetBtn')
 
     const loginCheck = (user) => {
         if (user) {
             /* display logout button if user is loggedIn */
             signInBtn.style.display = 'none'
             signOutBtn.style.display = 'block'
+            profilBtn.style.display = 'block'
+            postPetBtn.style.display = 'block'
             if (start)
                 start.style.display = 'block'
         } else {
             /* not display buttons if user is not logged in and show logout */
             signInBtn.style.display = 'block'
             signOutBtn.style.display = 'none'
+            profilBtn.style.display = 'none'
+            postPetBtn.style.display = 'none'
             if (start)
                 start.style.display = 'none'
 
