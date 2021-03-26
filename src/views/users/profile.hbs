@@ -1,14 +1,148 @@
 <link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="/css/registerPet.css">
 
-<section class="pets">
-    <div class="container pt-5 pb-5">
-        <p class="text-center">Mascotas perdidas</p>
-        <h2 class="text-center mb-5">Tus publicaciones</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4" id="cardContainer">
+<style>
+    .image {
+        position: absolute;
+    }
 
-            
+    .image img {
+        position: fixed;
+        top: 54%;
+        left: 51.5%;
+        width: 5rem;
+    }
+
+
+    .spinner-border {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 8rem;
+        height: 8rem;
+        color: var(--bg-blue) !important;
+    }
+
+    .close {
+        transform: translateY(-100%);
+        transition: all 0.5s;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .profile-top .row,
+    .user-info .row {
+        width: 900px;
+        background: #fff;
+        margin: 0 auto;
+        box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        padding: 2rem 0;
+    }
+
+    .user-info .row {
+        padding: 1rem 0;
+    }
+
+    .profile-top .img-side img {
+        width: 10rem;
+    }
+
+    .profile-top .info-side {
+        padding-left: 4rem;
+    }
+
+    .user-info .row .col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .user-info .row .col .info {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-left: 0.5rem;
+    }
+
+    .user-info .row .col .info p {
+        margin-bottom: 0;
+    }
+
+    .user-info .row .col .info .number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text-blue);
+    }
+</style>
+
+
+<div id="container">
+    <div class="image">
+        <img src="/img/logo.png" alt="">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
+</div>
+
+<div class="containerInside hide" id="containerInside">
+    <section class="profile-top" id="profileInfo">
+
+    </section>
+
+    <section class="user-info" id="profileStatistics">
+    </section>
+
+    <section class="pets">
+        <div class="container pt-5 pb-5">
+
+            <div class="d-flex justify-content-center collapse-buttons">
+                <button class="btn mx-3" id="postsBtn">
+                    Publicaciones activas
+                </button>
+                <button class="btn mx-3" id="foundBtn">
+                    Encontrados
+                </button>
+            </div>
+
+            <div class="postsContainer mt-5" id="postsContainer">
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="posts"></div>
+            </div>
+
+            <div class="foundContainer mt-5 hide" id="foundContainer">
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="found"></div>
+            </div>
+        </div>
+
+</div>
 </section>
 
-<script src="js/profile.js"></script>
+<!-- MODAL -->
+<div class="modal fade deletePostModal" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">
+                    Borrar post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>¿Seguro que quieres borrar tu post?
+                </h6>
+                <p>Esta acción no se podrá revertir</p>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn mt-5" id="deleteBtn">Borar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="js/general.js"></script>
+<script src="js/profile.js" type="module"></script>

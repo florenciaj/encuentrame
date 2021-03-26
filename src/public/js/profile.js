@@ -1,71 +1,79 @@
-//TODO: definir user con firebase
-let user = '6048c0fe48644c1044231eb4'
-const cardContainer = document.getElementById('cardContainer')
+import { UI } from "./UI.js";
 
-window.addEventListener("load", async function(event) {
-    await loadDoc('GET', `/api/user/get-pets/${user}`, getPosts)
+const ui = new UI()
+
+window.addEventListener("load", function () {
+    let userId = localStorage.getItem("userId")
 
 
-    setTimeout(() => {
-        /* DELETE AND POST BUTTONS */
-        let deleteBtns = document.querySelectorAll('.deleteBtn')
-        let editBtns = document.querySelectorAll('.editBtn')
-
-        deleteBtns.forEach((deleteBtn) => {
-            deleteBtn.addEventListener('click', deletePost)
+    loadPageInfo()
+        .then(() => {
+            preloader()
         })
-    }, 3000);
-})
+        .then(() => {
+            setTimeout(() => {
+                deleteButton()
+            }, 8500)
+        })
 
+    function loadPageInfo() {
+        return new Promise(async function (resolve, reject) {
+            await loadDoc('GET', `http://localhost:5500/api/user/posts/${userId}`, ui.getPosts)
 
-function loadDoc(httpMethod, url, cFunction) {
-    var xhttp
-    xhttp = new XMLHttpRequest()
-    xhttp.onreadystatechange = async function() {
-        if (this.readyState == 4 && this.status == 200) {
-            items = JSON.parse(this.responseText)
-            await cFunction(items)
-        }
-    };
-    xhttp.open(httpMethod, url, true)
-    xhttp.send()
-}
+            await loadDoc('GET', `http://localhost:5500/api/user/posts/${userId}`, ui.createProfileStatistics)
 
-function deletePost(e) {
-    console.log('entraste a la función borrar')
-    loadDoc('DELETE', `/api/pet/delete-pet/${e.target.value}`, reloadPosts)
-}
+            await loadDoc('GET', `http://localhost:5500/api/user/${userId}`, ui.createProfileInfo)
 
-function reloadPosts() {
-    cardContainer.innerHTML = ""
-    loadDoc('GET', `/api/user/get-pets/${user}`, getPosts)
-}
-
-
-/* LOAD POSTS */
-function getPosts(items) {
-    items = items.petFound
-    for (let i = 0; i < items.length; i++) {
-        const card = document.createElement('div')
-        card.classList.add('col')
-        card.innerHTML += `
-                <div class="card">
-                    <div class="card-img">
-                        <img src="/img/upload/${items[i].photo}" class="card-img-top" alt="">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${items[i].name}</h5>
-                        <div class="card-text">
-                            <p><i class="far fa-calendar mr"></i>${items[i].age} años</p>
-                            <p><i class="fas fa-plus-circle mr"></i>${items[i].features}</p>
-                            <div class="card-button">
-                                <button type="button" class="btn small-btn editBtn" value="${items[i]._id}">Editar</button>
-                                <button type="button" class="btn small-btn deleteBtn" value="${items[i]._id}">Borrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `
-        cardContainer.appendChild(card)
+            resolve('ok')
+        })
     }
-}
+
+    function preloader() {
+        setTimeout(() => {
+            const container = document.getElementById('container')
+
+            containerInside.classList.remove('hide')
+            container.classList.add('hide')
+        }, 3000)
+    }
+
+    function deleteButton() {
+        /* DELETE BUTTONS */
+        document.querySelectorAll('.deleteBtn').forEach((deleteBtn) => {
+            deleteBtn.addEventListener('click', function (e) {
+
+                document.getElementById('deleteBtn').addEventListener('click', () => {
+                    deletePost(e.target.value)
+                })
+            })
+        })
+
+        function deletePost(pet) {
+            loadDoc('DELETE', `http://localhost:5500/api/pet/delete-pet/${pet}`, reloadPosts)
+        }
+
+        /* RELOAD POSTS */
+        function reloadPosts() {
+            window.location.reload()
+        }
+    }
+
+    /* USER POSTS FILTER */
+    const postsContainer = document.getElementById('postsContainer')
+    const foundContainer = document.getElementById('foundContainer')
+
+    document.getElementById('postsBtn').addEventListener('click', () => {
+        postsContainer.classList.remove('hide')
+        postsContainer.classList.add('show')
+        foundContainer.classList.remove('show')
+        foundContainer.classList.add('hide')
+    });
+
+    document.getElementById('foundBtn').addEventListener('click', () => {
+        foundContainer.classList.remove('hide')
+        foundContainer.classList.add('show')
+        postsContainer.classList.remove('show')
+        postsContainer.classList.add('hide')
+    });
+
+})

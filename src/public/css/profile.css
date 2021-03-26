@@ -1,3 +1,22 @@
+.hide{
+    display: none;
+  }
+  
+  .show{
+    display:block;
+  }
+
+  .collapse-buttons .btn{
+    color: var(--pink-hover);
+    background-color: var(--pink-hover);
+    color: white;
+    border: 1px solid var(--pink-hover);
+  }
+
+  .collapse-buttons .btn:hover{
+      background-color: transparent;
+      color: var(--pink-hover);
+  }
 .pets .card .card-body .card-text .card-button .btn {
     position: relative;
 }
@@ -22,3 +41,21 @@
     background: #ee4e4e;
     color: white !important;
 }
+
+
+.card-button .btn.small-btn.foundBtn {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border: 1px solid var(--pink-hover);
+    color: white;
+    background: var(--pink-hover);
+}
+
+.deletePostModal .btn {
+    margin-top: 0 !important;
+    padding: 20px 31px;
+    background: #ee4e4e;
+}
+
+
+/* ------------------- */

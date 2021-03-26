@@ -1,11 +1,15 @@
+import { UI } from './UI.js';
+
+const ui = new UI()
 const stepOneContainer = document.getElementById('stepOneContainer')
 const stepTwoContainer = document.getElementById('stepTwoContainer')
 const btnSubmit = document.getElementById('btnSubmit')
 let checkedInputs = 0
+let checkedColours = []
+let photoBase
 
 const validInputs = {
     name: false,
-    breed: false,
     age: false,
     gender: false,
     petType: false,
@@ -18,38 +22,21 @@ const validInputs = {
 }
 
 /* NEXT AND PREVIOUS BUTTONS */
-const btnNext = document.getElementById('btnNext')
-const btnPrevious = document.getElementById('btnPrevious')
-const formMessage1 = document.getElementById('formMessage1')
-const formMessage2 = document.getElementById('formMessage2')
+document.getElementById('btnNext').addEventListener('click', function() {
+    const formMessage1 = document.getElementById('formMessage1')
 
-btnNext.addEventListener('click', function() {
-    if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo) {
+    if (validInputs.name && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo) {
         if (checkedInputs) {
             stepOneContainer.classList.add('hide')
             stepTwoContainer.classList.remove('hide')
             btnSubmit.classList.remove('hide')
-        } else {
-            showErrorMessage(formMessage1)
-        }
-    } else {
-        showErrorMessage(formMessage1)
-    }
+        } else
+            ui.showToastErrorMessage(formMessage1)
+    } else
+        formMessage1.classList.add('formMessage-active')
 })
 
-function showErrorMessage(formMessage) {
-    formMessage.classList.add('formMessage-active')
-    setTimeout(() => {
-        formMessage.classList.remove('formMessage-active')
-    }, 5000)
-}
-
-function checkBoxValidation(e) {
-    if (e.target.checked)
-        return checkedInputs += 1
-}
-
-btnPrevious.addEventListener('click', function() {
+document.getElementById('btnPrevious').addEventListener('click', function() {
     stepOneContainer.classList.remove('hide')
     stepTwoContainer.classList.add('hide')
     btnSubmit.classList.add('hide')
@@ -67,38 +54,43 @@ window.addEventListener('load', () => {
     function formValidation(e) {
         const regexText = /^[a-zA-ZÀ-ÿ\s]{1,40}$/
         const regexNumber = /^\d+$/
+        const regexAge = /^\d+(.\d+)?$/
         const regexAddress = /^[a-zA-ZÀ-ÿ\s\d]+$/
 
-        switch (e.target.name) { //obtiene que se está clickeando
+        let input = e.target
+        switch (input.name) {
             case 'name':
-                validateInput(regexText, e.target)
+                validateInput(regexText, input)
                 break;
             case 'breed':
-                validateInput(regexText, e.target)
+                validateInput(regexText, input)
                 break;
             case 'age':
-                validateInput(regexNumber, e.target)
+                validateInput(regexAge, input)
                 break;
             case 'place':
-                validateInput(regexAddress, e.target)
+                validateInput(regexAddress, input)
                 break;
         }
     }
 
     function hasAValue(e) {
-        if (e.target.value)
-            validInput(e.target)
+        let input = e.target
+        if (input.value)
+            validInput(input)
         else
-            invalidInput(e.target)
+            invalidInput(input)
     }
 
     function textareaValidation(e) {
-        if (e.target.value) {
-            if (e.target.value.length > 0 && e.target.value.length <= 1000)
-                return validInput(e.target)
-            invalidInput(e.target)
+        let textarea = e.target
+
+        if (textarea.value) {
+            if (textarea.value.length > 0 && textarea.value.length <= 1000)
+                return validInput(textarea)
+            invalidInput(textarea)
         } else
-            invalidInput(e.target)
+            invalidInput(textarea)
     }
 
     function validateInput(expression, input) {
@@ -106,9 +98,13 @@ window.addEventListener('load', () => {
             if (input.name === 'age')
                 return validateAge(input)
             validInput(input)
-        } else {
+        } else
             invalidInput(input)
-        }
+    }
+
+    function checkBoxValidation(e) {
+        if (e.target.checked)
+            return checkedInputs += 1
     }
 
     /* field listeners */
@@ -134,21 +130,61 @@ window.addEventListener('load', () => {
     /* SUBMIT FORM VALIDATION */
     form.addEventListener('submit', (e) => {
         e.preventDefault()
+        const formMessage2 = document.getElementById('formMessage2')
 
-        if (validInputs.name && validInputs.breed && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo && validInputs.place && validInputs.date && validInputs.hour) {
-            form.submit()
-        } else {
-            showErrorMessage(formMessage2)
-        }
+        if (validInputs.name && validInputs.age && validInputs.gender && validInputs.petType && validInputs.features && validInputs.photo && validInputs.place && validInputs.date && validInputs.hour) {
+
+            let data, options
+            toBase64()
+                .then((res) => {
+                    data = {
+                        name: document.getElementById('nameInput').value,
+                        breed: document.getElementById('breedInput').value || 'No aplica',
+                        age: document.getElementById('ageInput').value,
+                        gender: document.getElementById('genderInput').value,
+                        pet_type: document.getElementById('petTypeInput').value,
+                        photo: photoBase,
+                        features: document.getElementById('featuresInput').value,
+                        colour: checkedColours,
+                        place: document.getElementById('placeInput').value,
+                        hour: document.getElementById('hourInput').value,
+                        date: document.getElementById('dateInput').value,
+                        firebase_id: firebase.auth().currentUser.uid
+                    }
+                    console.log(data)
+                    console.log(JSON.stringify(data))
+                    options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    }
+                }).then(() => {
+                    fetch('http://localhost:5500/api/pet/create-pet', options)
+                        .then((res) => {
+                            console.log(res)
+                        })
+                })
+                .then(() => {
+                    ui.showSuccessToast('Se creó tu post')
+                })
+                .catch((err) => {
+                    ui.showToastErrorMessage(err)
+                    console.error(err)
+                })
+
+        } else
+            formMessage2.classList.add('formMessage-active')
     })
 
 
     /* PREVIEW IMAGE */
     document.getElementById("photo").onchange = function(e) {
         let reader = new FileReader()
-        reader.readAsDataURL(e.target.files[0]) // se lee el archivo subido y se pasa al fileReader
+        reader.readAsDataURL(e.target.files[0])
 
-        reader.onload = function() { //cuando la img esté lista se ejecuta
+        reader.onload = function() {
             let preview = document.getElementById('preview')
             let photo = document.createElement('img')
             photo.classList.add('w-100')
@@ -158,119 +194,39 @@ window.addEventListener('load', () => {
             preview.append(photo)
         }
     }
-
-    /* PREVIEW CARD CONTENT */
-    let arrayColous = []
-    let checkedColours = []
-
-    function iteratePetValuesToWrite() {
-        const petValues = ['name', 'breed', 'gender', 'age', 'petType', 'features']
-        for (let i = 0; i < petValues.length; i++) {
-            writeInfoGiven(petValues[i])
-        }
-
-        function writeInfoGiven(inputName) {
-            if (document.getElementById(`${inputName}Input`)) {
-                let nameInput = document.getElementById(`${inputName}Input`)
-                let nameOutput = document.getElementById(`${inputName}Output`)
-                let colour = [];
-                nameInput.addEventListener('keyup', function() {
-                    if (nameOutput.id == 'ageOutput')
-                        formatAge(nameInput, nameOutput)
-                    else
-                        nameOutput.innerHTML = nameInput.value
-                });
-
-                if (nameInput.id == 'genderInput' || nameInput.id == 'petTypeInput') {
-                    nameInput.addEventListener('change', function() {
-                        nameOutput.innerHTML = nameInput.value
-                    });
-                }
-            }
-
-            function formatAge(nameInput, nameOutput) {
-                let inputValue = nameInput.value;
-                if (inputValue > 1 && inputValue < 30) {
-                    nameOutput.innerHTML = `${inputValue} años`;
-
-                } else if (inputValue == 1) {
-                    nameOutput.innerHTML = `${inputValue} año`;
-
-                } else if (inputValue > 0 && inputValue < 1) {
-                    nameOutput.innerHTML = `${inputValue} meses`;
-
-                } else {
-                    nameOutput.innerHTML = '';
-                }
-            }
-            //
-        };
-    }
-
-    function getSelectedColour() {
-        document.querySelectorAll('.form-check-input').forEach(function(el) {
-
-            let colour = document.getElementById(el.id)
-            arrayColous.push(colour)
-
-            for (let i = 0; i < arrayColous.length; i++) {
-                colour.addEventListener('change', function() {
-                    if (arrayColous[i].checked) {
-
-                        if (!checkedColours.includes(arrayColous[i].value))
-                            checkedColours.push(arrayColous[i].value)
-
-
-                        let colourOutput = document.getElementById('colourOutput')
-                        colourOutput.innerHTML = checkedColours
-                    } else {
-                        console.log(arrayColous[i])
-
-                        checkedColours.splice(checkedColours.indexOf(arrayColous[i].value), 1)
-                        colourOutput.innerHTML = checkedColours
-
-                    }
-
-                })
-            }
-        });
-    }
-
-    function iterateLossValuesToWrite() {
-        const lossValues = ['place', 'hour', 'date']
-
-        for (let i = 0; i < lossValues.length; i++) {
-            writeInfoGiven(lossValues[i])
-        }
-
-        function writeInfoGiven(inputName) {
-            if (document.getElementById(`${inputName}Input`)) {
-                let nameInput = document.getElementById(`${inputName}Input`)
-                let nameOutput = document.getElementById(`${inputName}Output`)
-
-                nameInput.addEventListener('keyup', function() {
-                    nameOutput.innerHTML = nameInput.value
-                });
-
-                if (nameInput.id == 'hourInput' || nameInput.id == 'dateInput') {
-                    nameInput.addEventListener('change', function() {
-                        nameOutput.innerHTML = nameInput.value
-                    });
-                }
-            }
-        };
-    }
-
-    getSelectedColour()
-    iteratePetValuesToWrite()
-    iterateLossValuesToWrite()
 })
 
-
-
 function validateAge(input) {
-    (input.value < 0 || input.value > 30) ? invalidInput(input): validInput(input)
+    (input.value < 0 || input.value > 30 || input.value.length > 3) ? invalidInput(input): validInput(input)
 }
+
+document.querySelectorAll('.form-check-input').forEach(function(el) {
+
+    let colour = document.getElementById(el.id)
+    arrayColous.push(colour)
+
+    for (let i = 0; i < arrayColous.length; i++) {
+        colour.addEventListener('change', function() {
+
+            if (arrayColous[i].checked) {
+                if (!checkedColours.includes(arrayColous[i].value))
+                    checkedColours.push(arrayColous[i].value)
+
+                let colourOutput = document.getElementById('colourOutput')
+                colourOutput.innerHTML = checkedColours
+
+            } else {
+                let position = checkedColours.indexOf(arrayColous[i].value)
+
+                checkedColours.splice(position, 1)
+                colourOutput.innerHTML = checkedColours
+
+                if (checkedColours.length == 0)
+                    colourOutput.innerHTML = '<span class="text-secondary">color</span>'
+            }
+        })
+    }
+})
 
 function invalidInput(input) {
     document.getElementById(`${input.name}Group`).classList.add('error')
@@ -288,4 +244,16 @@ function validInput(input) {
     document.querySelector(`#${input.name}Group i`).classList.remove('fa-times-circle')
     document.querySelector(`#${input.name}Group .inputError`).classList.remove('inputError-active')
     validInputs[input.name] = true
+}
+
+const base64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+})
+
+async function toBase64() {
+    let filePhoto = document.querySelector('#photo').files[0]
+    photoBase = await base64(filePhoto)
 }
