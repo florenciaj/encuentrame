@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ui.showToast('Chau! Espero volver a verte pronto')
             console.log('sign out')
             localStorage.setItem('userId', undefined)
+            localStorage.setItem('userEmail', undefined)
             localStorage.setItem('userName', undefined)
             localStorage.setItem('userPhoto', undefined)
         }).catch((err) => {
@@ -152,13 +153,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log('signin')
 
             let userId = localStorage.getItem('userId')
+            let userEmail = localStorage.getItem('userEmail')
             let userName = localStorage.getItem('userName')
             let userPhoto = localStorage.getItem('userPhoto')
 
-            if (userId === 'undefined')
+            if (userId === 'undefined' || userId == null)
                 localStorage.setItem('userId', firebase.auth().currentUser.uid)
 
-            if (userPhoto === 'undefined' ) {
+            if (userEmail === 'undefined' || userEmail == null ) {
+                if (firebase.auth().currentUser.email)
+                    localStorage.setItem('userEmail', firebase.auth().currentUser.email)
+
+                else
+                    localStorage.setItem('userEmail',  document.getElementById('email').value)
+            }
+
+            if (userPhoto === 'undefined' || userPhoto == null ) {
                 if (firebase.auth().currentUser.photoURL)
                     localStorage.setItem('userPhoto', firebase.auth().currentUser.photoURL)
 
@@ -166,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     localStorage.setItem('userPhoto', 'img/user_photo.png')
             }
 
-            if (userName === 'undefined') {
+            if (userName === 'undefined' ||userName == null) {
                 if (firebase.auth().currentUser.displayName)
                     localStorage.setItem('userName', firebase.auth().currentUser.displayName)
 

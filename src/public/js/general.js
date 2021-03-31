@@ -10,3 +10,24 @@ function loadDoc(httpMethod, url, cFunction) {
     xhttp.open(httpMethod, url, true)
     xhttp.send()
 }
+
+function getOptionsToGet(){
+    let optionsGET = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    }
+    return optionsGET
+}
+
+function getOptionsToPost(data){
+    let optionsPOST = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    }
+    return optionsPOST
+}
