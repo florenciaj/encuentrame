@@ -72,6 +72,22 @@ a {
   display: none;
 }
 
+/* ALERTS */
+
+.alert {
+  height: auto;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  border: none;
+  margin: 0;
+  margin-top: 1rem;
+}
+
+.alert-dismissible .btn-close {
+  font-size: 0.6rem;
+  padding: 0.96rem 1rem;
+}
+
 /* TOAST */
 .toast-wrapper {
   z-index: 5;
@@ -111,6 +127,14 @@ header .collapse .navbar-nav .nav-item a.active {
 
 header .collapse .navbar-nav .nav-item i {
   margin-right: 0.5rem;
+}
+
+#signInBtn,
+#signOutBtn,
+#start,
+#profilBtn,
+#postPetBtn {
+  display: none;
 }
 
 /* SIGN IN / UP VIEWS */
@@ -221,11 +245,11 @@ header .collapse .navbar-nav .nav-item i {
   background-color: var(--light);
 }
 
-.info-pets img{
-    border-radius: 50%;
-    width: 10rem; 
-    height:10rem; 
-    object-fit: cover;
+.info-pets img {
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
 }
 
 .register-pet .container .row .img-container img {
@@ -319,12 +343,12 @@ header .collapse .navbar-nav .nav-item i {
   border-radius: 2rem;
 }
 
-#petInfoModal .modal-body.contact-body .contact-text p{
-    display: inline-block;
+#petInfoModal .modal-body.contact-body .contact-text p {
+  display: inline-block;
 }
 
-#petInfoModal .modal-body p b{
-    font-weight: 600;
+#petInfoModal .modal-body p b {
+  font-weight: 600;
 }
 
 #petInfoModal .main,
@@ -369,31 +393,6 @@ header .collapse .navbar-nav .nav-item i {
 }
 #petInfoModal #featuresModal {
   margin-top: -1rem;
-}
-
-/*ALERTS*/
-
-.alert {
-  height: auto;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  border: none;
-  margin: 0;
-  margin-top: 1rem;
-}
-
-.alert-dismissible .btn-close {
-  font-size: 0.6rem;
-  padding: 0.96rem 1rem;
-}
-
-/* NAVIGATION / HEADER */
-#signInBtn,
-#signOutBtn,
-#start,
-#profilBtn,
-#postPetBtn {
-  display: none;
 }
 
 /*FORM VALIDATION*/
@@ -458,8 +457,6 @@ header .collapse .navbar-nav .nav-item i {
   display: block;
 }
 
-/* ----- -----  Estilos para Validacion ----- ----- */
-
 .success .stateValidation {
   color: #1ed12d;
   background-color: white;
@@ -478,4 +475,77 @@ header .collapse .navbar-nav .nav-item i {
 
 .error .form-control {
   border: 1.5px solid #bb2929;
+}
+
+@media (max-width: 974px) {
+  .slide .slide-left h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 892px) {
+  .slide {
+    height: 70vh;
+  }
+
+  .slide .slide-left h1 {
+    font-weight: 800;
+  }
+
+  .register-pet .container .row .img-container {
+    display: none;
+  }
+
+  .register-pet .container .row .register-pet-info {
+    width: 100%;
+  }
+
+  .register-pet .register-pet-info .btn-container.mt-5 {
+    margin-top: 1rem !important;
+  }
+}
+
+@media (max-width: 790px) {
+  .slide .slide-left h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 691px) {
+  body {
+    font-size: 0.9rem;
+  }
+  a {
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    padding: 20px 30px;
+    font-size: 0.9rem;
+  }
+  .slide .slide-left h1 {
+    font-size: 2.5rem;
+  }
+
+  .slide .slide-left .btn {
+    padding: 21px 44px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide .slide-left h1 {
+    font-size: 2rem;
+  }
+  .slide .slide-left h5 {
+    font-size: 1rem;
+  }
+
+  a.btn {
+    padding: 18px 40px;
+  }
+  a.btn.mb-5 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 0 !important;
+  }
 }
