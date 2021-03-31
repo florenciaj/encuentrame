@@ -45,7 +45,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
             auth.signInWithEmailAndPassword(email, password).
                 then((userCredential) => { }).then(() => {
                     signInForm.reset()
-                    ui.showToast(true)
+                    let userName
+                    
+                    if (firebase.auth().currentUser.displayName)
+                    userName = firebase.auth().currentUser.displayName
+                    
+                    else
+                        userName = ''
+                        
+                    ui.showToastGreeting(userName)
                 }).catch((e) => {
                     ui.showToast(e.message)
                     console.error(e.message);
@@ -119,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     })
                 }).then(() => {
                     saveUserInDatabase()
-                    ui.showToast(true)
+                    ui.showToastGreeting(signUpForm['name'].value)
                     signUpForm.reset()
                 }).catch((err) => {
                     console.log(err)
@@ -180,8 +188,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 if (firebase.auth().currentUser.displayName)
                     localStorage.setItem('userName', firebase.auth().currentUser.displayName)
 
-                else
-                    localStorage.setItem('userName', document.getElementById('name').value)
+                else{
+                    try{
+                        localStorage.setItem('userName', document.getElementById('name').value)
+                    }
+                    catch(e){
+                        localStorage.setItem('userName', "")
+                    }
+                }
+                    
             }
 
             // db.collection('users')

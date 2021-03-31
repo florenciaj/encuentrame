@@ -25,4 +25,16 @@ router.get('/editar-post/:pet', (req, res) => {
     res.render('pets/editPet', { petId: pet });
 })
 
+router.get('/dogs', (req,res)=>{
+    res.render('pets/dogs')
+})
+
+router.get('/cats', (req,res)=>{
+    res.render('pets/cats')
+})
+
+router.get('/rabbits', (req,res)=>{
+    res.render('pets/rabbits')
+})
+
 module.exports = router
