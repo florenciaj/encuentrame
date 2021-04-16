@@ -1,9 +1,10 @@
 export class UI {
     getPets(items) {
         console.log(items)
-        for (let i = 0; i < items.length; i++) {    
+        for (let i = 0; i < items.length; i++) {
             document.getElementById('cardContainer').innerHTML += `
-                <div class="col">
+
+                <div class="box">
                     <div class="card">
                         <div class="card-img">
                             <img src="${items[i].photo}" class="card-img-top" alt="">
@@ -14,23 +15,23 @@ export class UI {
                                 <p><i class="far fa-calendar mr"></i>${items[i].age} años</p>
                                 <p><i class="fas fa-plus-circle mr"></i>${items[i].features}</p>
                                 <div class="card-button">
-                                    <button class="btn small-btn showModal" data-bs-toggle="modal" data-bs-target="#petInfoModal" id="${items[i]._id}">Ver más</button>
+                                    <button class="btn small-btn showModal" data-bs-toggle="modal" data-bs-target="#petInfoModal" id="${items[i].id}">Ver más</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>   
             `
         }
     }
-    
+
     getPosts(items) {
         items = items.pets
         for (let i = 0; i < items.length; i++) {
             if (items[i].state === 'Perdido')
-                showPetsLost('posts', items, i)   
-            else 
-                showPetsFound('found', items, i)   
+                showPetsLost('posts', items, i)
+            else
+                showPetsFound('found', items, i)
         }
     }
 
@@ -57,7 +58,8 @@ export class UI {
 
     createProfileStatistics(e) {
         const user = e.pets
-        let lost = 0, found = 0
+        let lost = 0,
+            found = 0
 
         for (let i = 0; i < user.length; i++) {
             if (user[i].state === 'Perdido')
@@ -102,7 +104,7 @@ export class UI {
 
     createToast() {
         let toastElList = [].slice.call(document.querySelectorAll('.toast'))
-        let toastList = toastElList.map(function (toastEl) {
+        let toastList = toastElList.map(function(toastEl) {
             return new bootstrap.Toast(toastEl)
         });
         toastList.forEach(toast => toast.show());
@@ -179,7 +181,7 @@ function showPetsLost(id, items, i) {
                     <div class="card-text">
                         <p><i class="far fa-calendar mr"></i>${items[i].age} años</p>
                         <p><i class="fas fa-plus-circle mr"></i>${items[i].features}</p>
-                        <div class="card-button">
+                        <div class="card-button d-flex justify-content-end">
                             <a href="/editar-post/${items[i]._id}" class="btn small-btn editBtn">Editar</a>
                             <button type="button" class="btn small-btn deleteBtn" value="${items[i]._id}" data-bs-toggle="modal" data-bs-target="#modal">Borrar</button>
                         </div>
